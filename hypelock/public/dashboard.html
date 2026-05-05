@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>HYPELOCK — Attention Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #060608;
+    --bg2:      #0c0c10;
+    --bg3:      #111118;
+    --border:   #1e1e2e;
+    --accent:   #00ff88;
+    --accent2:  #ff3c6e;
+    --accent3:  #ffaa00;
+    --accent4:  #00aaff;
+    --text:     #e0e0f0;
+    --muted:    #555570;
+    --mono:     'Share Tech Mono', monospace;
+    --sans:     'Barlow Condensed', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,255,136,0.012) 2px,
+      rgba(0,255,136,0.012) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(0,255,136,0.5);
+  }
+  .logo span { color: var(--muted); font-weight: 300; }
+
+  .status-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-pill.online  { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.3); }
+  .status-pill.offline { background: rgba(255,60,110,0.1); color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ── NAV TABS ── */
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab:hover  { color: var(--text); }
+
+  /* ── PAGES ── */
+  .page { display: none; padding: 16px; }
+  .page.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.4;
+  }
+  .card-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .stat {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-val {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 16px rgba(0,255,136,0.4);
+  }
+  .stat-val.red    { color: var(--accent2); text-shadow: 0 0 16px rgba(255,60,110,0.4); }
+  .stat-val.yellow { color: var(--accent3); text-shadow: 0 0 16px rgba(255,170,0,0.4); }
+  .stat-val.blue   { color: var(--accent4); text-shadow: 0 0 16px rgba(0,170,255,0.4); }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SIGNAL FEED ── */
+  .signal-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--muted);
+    border-radius: 3px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .signal-item.EXECUTE { border-left-color: var(--accent); }
+  .signal-item.WATCH   { border-left-color: var(--accent3); }
+  .signal-item.IGNORE  { border-left-color: var(--muted); }
+  .signal-item.DISCARDED { border-left-color: var(--accent2); opacity: 0.5; }
+
+  .signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .signal-token {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .signal-action {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+  .signal-action.EXECUTE  { background: rgba(0,255,136,0.15); color: var(--accent); }
+  .signal-action.WATCH    { background: rgba(255,170,0,0.15); color: var(--accent3); }
+  .signal-action.IGNORE   { background: rgba(85,85,112,0.2); color: var(--muted); }
+  .signal-action.DISCARDED{ background: rgba(255,60,110,0.15); color: var(--accent2); }
+
+  .signal-meta {
+    display: flex;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .signal-meta span { display: flex; align-items: center; gap: 3px; }
+
+  .score-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent4), var(--accent));
+    transition: width 0.5s ease;
+  }
+
+  /* ── WEIGHT BARS ── */
+  .weight-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .weight-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    width: 120px;
+    flex-shrink: 0;
+  }
+  .weight-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .weight-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent4), var(--accent));
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .weight-pct {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    width: 36px;
+    text-align: right;
+  }
+
+  /* ── INJECT FORM ── */
+  .form-group { margin-bottom: 12px; }
+  .form-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+  }
+  input, select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 3px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+  }
+  .btn-primary:hover { background: #00ffaa; box-shadow: 0 0 20px rgba(0,255,136,0.4); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  /* ── LOG OUTPUT ── */
+  .log-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.6;
+  }
+
+  /* ── TUTORIAL ── */
+  .tutorial-step {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .step-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .step-body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+  }
+  .code-inline {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2px 6px;
+    color: var(--accent3);
+  }
+  .code-block {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 12px;
+    margin-top: 10px;
+    color: var(--accent3);
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  /* ── PIPELINE DIAGRAM ── */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 8px 0;
+  }
+  .pipe-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    text-align: center;
+    width: 100%;
+    max-width: 260px;
+    position: relative;
+  }
+  .pipe-node.highlight { border-color: var(--accent); color: var(--accent); }
+  .pipe-arrow {
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .pipe-desc {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 260px;
+    margin: 2px 0 4px;
+  }
+
+  /* ── CHIP ── */
+  .chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin: 2px;
+  }
+  .chip-green  { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.2); }
+  .chip-red    { background: rgba(255,60,110,0.1); color: var(--accent2); border: 1px solid rgba(255,60,110,0.2); }
+  .chip-yellow { background: rgba(255,170,0,0.1); color: var(--accent3); border: 1px solid rgba(255,170,0,0.2); }
+  .chip-blue   { background: rgba(0,170,255,0.1); color: var(--accent4); border: 1px solid rgba(0,170,255,0.2); }
+
+  /* ── UPTIME TICKER ── */
+  .ticker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .empty-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.4; }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--accent);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+  #toast.error { background: var(--accent2); color: #fff; }
+
+  .refresh-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    float: right;
+  }
+  .refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .mode-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+  .mode-paper { background: rgba(255,170,0,0.15); color: var(--accent3); border: 1px solid rgba(255,170,0,0.3); }
+  .mode-live  { background: rgba(255,60,110,0.15); color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
+
+  select option { background: var(--bg2); }
+
+  .section-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">HYPE<span>LOCK</span></div>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <div id="modeBadge" class="mode-badge mode-paper">PAPER</div>
+    <div id="statusPill" class="status-pill offline">
+      <span class="dot"></span>
+      <span id="statusText">CONNECTING</span>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('dashboard')">DASHBOARD</div>
+  <div class="tab" onclick="switchTab('signals')">SIGNALS</div>
+  <div class="tab" onclick="switchTab('inject')">INJECT</div>
+  <div class="tab" onclick="switchTab('learning')">LEARNING</div>
+  <div class="tab" onclick="switchTab('tutorial')">TUTORIAL</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DASHBOARD PAGE
+════════════════════════════════════════════════════ -->
+<div class="page active" id="page-dashboard">
+
+  <div class="stat-grid">
+    <div class="stat">
+      <div class="stat-val" id="d-total">—</div>
+      <div class="stat-label">TOTAL SIGNALS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="d-uptime">—</div>
+      <div class="stat-label">UPTIME (s)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="d-executed">—</div>
+      <div class="stat-label">EXECUTED</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val red" id="d-discarded">—</div>
+      <div class="stat-label">DISCARDED</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">SYSTEM STATUS</div>
+    <div id="d-status-rows" style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--muted);">
+      Connecting to HYPELOCK API...
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ACTIVE WEIGHTS</div>
+    <div id="d-weights">
+      <div class="empty"><div class="empty-icon">⚖</div>Loading weights...</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">RECENT ACTIVITY <button class="refresh-btn" onclick="loadDashboard()">↻ REFRESH</button></div>
+    <div id="d-recent">
+      <div class="empty"><div class="empty-icon">📡</div>No signals yet</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SIGNALS PAGE
+════════════════════════════════════════════════════ -->
+<div class="page" id="page-signals">
+
+  <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center;">
+    <select id="filterAction" onchange="loadSignals()" style="flex:1;">
+      <option value="">ALL ACTIONS</option>
+      <option value="EXECUTE">EXECUTE</option>
+      <option value="WATCH">WATCH</option>
+      <option value="IGNORE">IGNORE</option>
+      <option value="DISCARDED">DISCARDED</option>
+    </select>
+    <button class="refresh-btn" style="float:none;" onclick="loadSignals()">↻</button>
+  </div>
+
+  <div id="signals-feed">
+    <div class="empty"><div class="empty-icon">📡</div>No signals yet.<br>System is collecting...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INJECT PAGE
+════════════════════════════════════════════════════ -->
+<div class="page" id="page-inject">
+
+  <div class="card">
+    <div class="card-title">MANUAL SIGNAL INJECTION</div>
+    <p style="font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;">
+      Inject a test signal directly into the pipeline. Useful for calibrating the Alpha Filter and Scorer without waiting for real social data.
+    </p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">TOKEN</label>
+        <input type="text" id="i-token" placeholder="WIF" value="WIF">
+      </div>
+      <div class="form-group">
+        <label class="form-label">PLATFORM</label>
+        <select id="i-platform">
+          <option value="farcaster">FARCASTER</option>
+          <option value="x">X</option>
+          <option value="zora">ZORA</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">SIGNAL TEXT</label>
+      <input type="text" id="i-text" placeholder="WIF is pumping hard right now">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">LIKES</label>
+        <input type="number" id="i-likes" placeholder="300" value="300">
+      </div>
+      <div class="form-group">
+        <label class="form-label">COMMENTS</label>
+        <input type="number" id="i-comments" placeholder="50" value="50">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">RECASTS</label>
+        <input type="number" id="i-recasts" placeholder="120" value="120">
+      </div>
+      <div class="form-group">
+        <label class="form-label">VELOCITY</label>
+        <input type="number" id="i-velocity" placeholder="15" value="15" step="0.1">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">FOLLOWERS</label>
+        <input type="number" id="i-followers" placeholder="8000" value="8000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">WALLET USD</label>
+        <input type="number" id="i-wallet" placeholder="2500" value="2500">
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="injectSignal()" style="margin-bottom:12px;">
+      ⚡ INJECT SIGNAL
+    </button>
+
+    <!-- PRESETS -->
+    <div style="margin-bottom:12px;">
+      <div class="card-title">QUICK PRESETS</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <button class="btn btn-secondary" onclick="loadPreset('whale')" style="width:auto;padding:6px 12px;font-size:11px;">🐳 WHALE</button>
+        <button class="btn btn-secondary" onclick="loadPreset('bot')" style="width:auto;padding:6px 12px;font-size:11px;">🤖 BOT ATTACK</button>
+        <button class="btn btn-secondary" onclick="loadPreset('organic')" style="width:auto;padding:6px 12px;font-size:11px;">🌱 ORGANIC</button>
+        <button class="btn btn-secondary" onclick="loadPreset('spam')" style="width:auto;padding:6px 12px;font-size:11px;">🚫 SPAM</button>
+      </div>
+    </div>
+
+    <div class="card-title">RESULT</div>
+    <div class="log-box" id="inject-result">Awaiting injection...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     LEARNING PAGE
+════════════════════════════════════════════════════ -->
+<div class="page" id="page-learning">
+
+  <div class="card">
+    <div class="card-title">LEARNING LOOP STATUS <button class="refresh-btn" onclick="loadLearning()">↻</button></div>
+    <div id="l-status" style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--muted);">
+      Loading...
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">CURRENT INDICATOR WEIGHTS</div>
+    <div id="l-weights">
+      <div class="empty"><div class="empty-icon">⚖</div>Loading...</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ACCURACY</div>
+    <div id="l-accuracy" style="text-align:center;padding:20px 0;">
+      <div class="stat-val" id="l-acc-val" style="font-size:48px;">—</div>
+      <div class="stat-label">EXECUTE HIT RATE</div>
+      <p style="font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:10px;">
+        % of EXECUTE signals that resulted in successful outcome (engagement ≥1.5× baseline)
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">HOW LEARNING WORKS</div>
+    <div style="font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;">
+      Every 10 minutes the loop evaluates signal outcomes at <span class="chip chip-blue">1h</span> and <span class="chip chip-blue">24h</span> windows.<br><br>
+      ✅ <span style="color:var(--accent)">Success</span> → top-3 contributing indicators get weight <strong style="color:var(--text)">increased</strong><br>
+      ❌ <span style="color:var(--accent2)">Failure</span> → top-3 contributing indicators get weight <strong style="color:var(--text)">decreased</strong><br><br>
+      Weights are always normalized to sum to 1.0. Min weight: 0.02. Max: 0.50.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     TUTORIAL PAGE
+════════════════════════════════════════════════════ -->
+<div class="page" id="page-tutorial">
+
+  <div class="section-title">FULL TUTORIAL</div>
+
+  <!-- PIPELINE DIAGRAM -->
+  <div class="card">
+    <div class="card-title">SYSTEM PIPELINE</div>
+    <div class="pipeline">
+      <div class="pipe-node highlight">DATA SOURCES</div>
+      <div class="pipe-desc">Farcaster · X · Zora</div>
+      <div class="pipe-arrow">↓</div>
+      <div class="pipe-node highlight">ALPHA FILTER v2</div>
+      <div class="pipe-desc">5-layer noise removal</div>
+      <div class="pipe-arrow">↓</div>
+      <div class="pipe-node highlight">ADAPTIVE SCORER</div>
+      <div class="pipe-desc">Dynamic weight scoring</div>
+      <div class="pipe-arrow">↓</div>
+      <div class="pipe-node highlight">DECISION ENGINE</div>
+      <div class="pipe-desc">EXECUTE · WATCH · IGNORE</div>
+      <div class="pipe-arrow" style="display:flex;gap:20px;justify-content:center;">↙&nbsp;&nbsp;&nbsp;↘</div>
+      <div style="display:flex;gap:8px;width:100%;max-width:260px;">
+        <div class="pipe-node" style="flex:1;font-size:11px;">EXECUTION<br><span style="color:var(--muted)">Bankr/Paper</span></div>
+        <div class="pipe-node" style="flex:1;font-size:11px;">DISTRIBUTION<br><span style="color:var(--muted)">X·FC·Zora</span></div>
+      </div>
+      <div class="pipe-arrow">↓</div>
+      <div class="pipe-node highlight">LEARNING LOOP</div>
+      <div class="pipe-desc">Weight adjustment ← feedback</div>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="tutorial-step">
+    <div class="step-num">STEP 01</div>
+    <div class="step-title">SETUP & START</div>
+    <div class="step-body">
+      Wejdź do folderu projektu i uruchom w trybie PAPER (bezpiecznym):
+      <div class="code-block">cd ~/Hyperlock/hypelock
+npm install
+npm run paper</div>
+      System startuje na porcie 3000. Dashboard dostępny pod:
+      <div class="code-block">http://localhost:3000</div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 02</div>
+    <div class="step-title">KONFIGURACJA TOKENÓW</div>
+    <div class="step-body">
+      Domyślnie system monitoruje: <span class="chip chip-green">WIF</span><span class="chip chip-green">BONK</span><span class="chip chip-green">POPCAT</span><span class="chip chip-green">PENGU</span><span class="chip chip-green">MOODENG</span><br><br>
+      Możesz zmienić przez zmienną środowiskową w <span class="code-inline">.env</span>:
+      <div class="code-block">WATCH_TOKENS=WIF,BONK,MYTOKEN,SOL</div>
+      Lub dynamicznie przez API:
+      <div class="code-block">curl -X POST http://localhost:3000/tokens \
+  -H "Content-Type: application/json" \
+  -d '{"token":"NEWTOKEN"}'</div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 03</div>
+    <div class="step-title">ALPHA FILTER — JAK DZIAŁA</div>
+    <div class="step-body">
+      Każdy sygnał przechodzi przez 5 warstw filtracji:<br><br>
+      <span class="chip chip-red">L1</span> <strong>Bot pattern</strong> — wysoki ratio likes/komentarze, okrągłe liczby, nowe konta<br>
+      <span class="chip chip-red">L2</span> <strong>Spam keywords</strong> — "free airdrop", "100x gem", nadmiar hashtagów<br>
+      <span class="chip chip-red">L3</span> <strong>Velocity spike</strong> — engagement >5× powyżej baseline w 60s<br>
+      <span class="chip chip-red">L4</span> <strong>Source repetition</strong> — te same konta angażujące się wielokrotnie<br>
+      <span class="chip chip-red">L5</span> <strong>Coordination</strong> — 5+ aktorów synchronizujących akcje w 30s<br><br>
+      Jeśli <span class="code-inline">noiseScore > 0.65</span> → sygnał jest DISCARDED.
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 04</div>
+    <div class="step-title">SCORING — DECYZJE</div>
+    <div class="step-body">
+      Po przejściu filtra sygnał jest scorowany (0-100):
+      <br><br>
+      <span class="chip chip-green">EXECUTE</span> effective score ≥ 75 → uruchamia trade<br>
+      <span class="chip chip-yellow">WATCH</span> effective score ≥ 40 → monitoruj<br>
+      <span class="chip chip-blue">IGNORE</span> effective score < 40 → pomiń<br><br>
+      <em>Effective score = raw score × (0.5 + 0.5 × confidence)</em><br><br>
+      Przetestuj zakładkę <strong>INJECT</strong> żeby zobaczyć jak różne sygnały są scorowane.
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 05</div>
+    <div class="step-title">PAPER MODE vs LIVE MODE</div>
+    <div class="step-body">
+      <span class="chip chip-yellow">PAPER</span> Wszystkie EXECUTE są symulowane. Zero realnych transakcji. Logi pokazują estimated PnL.<br><br>
+      <span class="chip chip-red">LIVE</span> Wymaga klucza Bankr API w <span class="code-inline">.env</span>:<br>
+      <div class="code-block">PAPER_MODE=false
+BANKR_API_KEY=twoj_klucz</div>
+      Następnie:
+      <div class="code-block">npm run live</div>
+      ⚠️ Upewnij się że system działa poprawnie przez kilka dni w PAPER zanim przełączysz.
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 06</div>
+    <div class="step-title">INTEGRACJE API</div>
+    <div class="step-body">
+      Uzupełnij <span class="code-inline">.env</span> żeby odblokować realne źródła danych:<br><br>
+      <span class="chip chip-blue">FARCASTER</span> Utwórz konto na neynar.com → skopiuj Signer UUID i FID<br>
+      <span class="chip chip-blue">X/TWITTER</span> developer.twitter.com → App-only Bearer Token (read) + OAuth 1.0a (write)<br>
+      <span class="chip chip-blue">ZORA</span> zora.co/manage → API Key<br><br>
+      Bez kluczy system działa w dry-run dla dystrybucji (logi co by opublikował).
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 07</div>
+    <div class="step-title">API ENDPOINTS</div>
+    <div class="step-body">
+      Pełne API dostępne na localhost:3000:<br>
+      <div class="code-block">GET  /health          → status systemu
+GET  /signals         → feed sygnałów
+GET  /signals?action=EXECUTE
+GET  /signals?limit=20
+POST /evaluate        → wstrzyknij sygnał
+GET  /learning/status → wagi i learning
+GET  /stats           → pełne statystyki
+POST /tokens          → dodaj token</div>
+    </div>
+  </div>
+
+  <div class="tutorial-step">
+    <div class="step-num">STEP 08</div>
+    <div class="step-title">DEPLOYMENT NA RAILWAY</div>
+    <div class="step-body">
+      Żeby uruchomić 24/7 na Railway:<br>
+      <div class="code-block">1. Push repo na GitHub (już zrobione)
+2. railway.app → New Project → GitHub
+3. Wybierz HazEOskA/Hyperlock
+4. Set Root Directory: hypelock
+5. Ustaw zmienne środowiskowe w Railway
+6. Deploy</div>
+      Railway automatycznie wykryje <span class="code-inline">npm start</span>.
+    </div>
+  </div>
+
+  <!-- TICKER at bottom -->
+  <div class="ticker" id="uptime-ticker">HYPELOCK — ATTENTION IS THE ALPHA</div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">Signal injected</div>
+
+<script>
+const API = ''; // same origin — served by Express
+
+// ══ TAB SWITCHING ════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const names = ['dashboard','signals','inject','learning','tutorial'];
+    t.classList.toggle('active', names[i] === name);
+  });
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.toggle('active', p.id === 'page-'+name);
+  });
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'signals')   loadSignals();
+  if (name === 'learning')  loadLearning();
+}
+
+// ══ TOAST ════════════════════════════════════════
+function toast(msg, isError=false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = isError ? 'error show' : 'show';
+  setTimeout(() => el.className = isError ? 'error' : '', 2500);
+}
+
+// ══ HEALTH CHECK ════════════════════════════════
+async function checkHealth() {
+  try {
+    const r = await fetch('/health', { signal: AbortSignal.timeout(3000) });
+    const d = await r.json();
+    const pill = document.getElementById('statusPill');
+    const txt  = document.getElementById('statusText');
+    pill.className = 'status-pill online';
+    txt.textContent = 'ONLINE';
+
+    const badge = document.getElementById('modeBadge');
+    badge.textContent = d.mode;
+    badge.className = 'mode-badge ' + (d.mode === 'PAPER' ? 'mode-paper' : 'mode-live');
+
+    document.getElementById('d-uptime').textContent = Math.round(d.uptime);
+    document.getElementById('d-total').textContent  = d.signals;
+    return true;
+  } catch {
+    const pill = document.getElementById('statusPill');
+    pill.className = 'status-pill offline';
+    document.getElementById('statusText').textContent = 'OFFLINE';
+    return false;
+  }
+}
+
+// ══ DASHBOARD ════════════════════════════════════
+async function loadDashboard() {
+  await checkHealth();
+  try {
+    const [statsR, sigsR] = await Promise.all([
+      fetch('/stats'),
+      fetch('/signals?limit=5')
+    ]);
+    const stats = await statsR.json();
+    const sigs  = await sigsR.json();
+
+    // Stat cards
+    const s = stats.store || {};
+    document.getElementById('d-executed').textContent  = s.executed  ?? '—';
+    document.getElementById('d-discarded').textContent = (s.totalSignals - s.executed - s.watched - s.ignored) || 0;
+
+    // Status rows
+    const exec = stats.execution || {};
+    document.getElementById('d-status-rows').innerHTML = `
+      <div><span style="color:var(--accent)">MODE</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${stats.mode || '—'}</div>
+      <div><span style="color:var(--accent)">PAPER TRADES</span>&nbsp; ${exec.simulatedOrders ?? 0}</div>
+      <div><span style="color:var(--accent)">REAL ORDERS</span>&nbsp;&nbsp; ${exec.realOrders ?? 0}</div>
+      <div><span style="color:var(--accent)">EST. PAPER PnL</span> $${exec.estimatedPaperPnl ?? '0.00'}</div>
+      <div><span style="color:var(--accent)">TOKENS WATCHED</span> ${(stats.tokens||[]).join(', ')}</div>
+    `;
+
+    // Weights
+    renderWeights('d-weights', s.weights || {});
+
+    // Recent signals
+    const feed = document.getElementById('d-recent');
+    if (!sigs.signals || !sigs.signals.length) {
+      feed.innerHTML = '<div class="empty"><div class="empty-icon">📡</div>No signals yet. System is collecting data...</div>';
+    } else {
+      feed.innerHTML = sigs.signals.map(renderSignalMini).join('');
+    }
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+// ══ SIGNALS FEED ════════════════════════════════
+async function loadSignals() {
+  const action = document.getElementById('filterAction').value;
+  const url = '/signals?limit=50' + (action ? '&action='+action : '');
+  try {
+    const r = await fetch(url);
+    const d = await r.json();
+    const feed = document.getElementById('signals-feed');
+    if (!d.signals || !d.signals.length) {
+      feed.innerHTML = '<div class="empty"><div class="empty-icon">📡</div>No signals match filter.<br>System is collecting data...</div>';
+      return;
+    }
+    feed.innerHTML = d.signals.map(renderSignalFull).join('');
+  } catch(e) {
+    document.getElementById('signals-feed').innerHTML =
+      '<div class="empty"><div class="empty-icon">⚠</div>Cannot reach API.<br>Is HYPELOCK running?</div>';
+  }
+}
+
+function renderSignalMini(s) {
+  const score = s.score || 0;
+  return `<div class="signal-item ${s.action}">
+    <div class="signal-header">
+      <div class="signal-token">$${s.token || '???'}</div>
+      <div class="signal-action ${s.action}">${s.action}</div>
+    </div>
+    <div class="signal-meta">
+      <span>📊 ${score.toFixed(0)}/100</span>
+      <span>🔊 ${s.platform || '?'}</span>
+      <span>🕐 ${timeAgo(s.timestamp)}</span>
+    </div>
+    <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
+  </div>`;
+}
+
+function renderSignalFull(s) {
+  const score = s.score || 0;
+  const noise = (s.noiseScore || 0);
+  return `<div class="signal-item ${s.action}">
+    <div class="signal-header">
+      <div class="signal-token">$${s.token || '???'} <span style="color:var(--muted);font-size:11px;font-family:var(--mono)">${s.platform||''}</span></div>
+      <div class="signal-action ${s.action}">${s.action}</div>
+    </div>
+    <div class="signal-meta" style="margin-bottom:6px;">
+      <span>📊 ${score.toFixed(1)}</span>
+      <span>🎯 ${((s.confidence||0)*100).toFixed(0)}%</span>
+      <span>🔇 noise:${noise.toFixed(2)}</span>
+      <span>🕐 ${timeAgo(s.timestamp)}</span>
+    </div>
+    ${s.outcome ? `<div style="font-family:var(--mono);font-size:10px;color:${s.outcome.success?'var(--accent)':'var(--accent2)'}">
+      OUTCOME: ${s.outcome.success ? '✅ SUCCESS' : '❌ FAILED'} (${s.outcome.window}) — ratio: ${(s.outcome.engagementRatio||1).toFixed(2)}×
+    </div>` : ''}
+    <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
+  </div>`;
+}
+
+// ══ WEIGHTS RENDERER ════════════════════════════
+function renderWeights(containerId, weights) {
+  const el = document.getElementById(containerId);
+  if (!weights || !Object.keys(weights).length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">⚖</div>No weight data</div>';
+    return;
+  }
+  const labels = {
+    likes: 'Likes',
+    comments: 'Comments',
+    recasts: 'Recasts / RT',
+    velocity: 'Velocity',
+    walletQuality: 'Wallet Quality',
+    engagementAcceleration: 'Acceleration',
+  };
+  el.innerHTML = Object.entries(weights).map(([k,v]) => {
+    const pct = (v * 100).toFixed(1);
+    return `<div class="weight-row">
+      <div class="weight-name">${labels[k]||k}</div>
+      <div class="weight-track"><div class="weight-fill" style="width:${Math.min(100, v*400)}%"></div></div>
+      <div class="weight-pct">${pct}%</div>
+    </div>`;
+  }).join('');
+}
+
+// ══ LEARNING ════════════════════════════════════
+async function loadLearning() {
+  try {
+    const r = await fetch('/learning/status');
+    const d = await r.json();
+
+    document.getElementById('l-status').innerHTML = `
+      <div><span style="color:var(--accent)">RUNNING</span>&nbsp;&nbsp;&nbsp;&nbsp; ${d.running ? '✅ YES' : '❌ NO'}</div>
+      <div><span style="color:var(--accent)">CYCLES</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${d.cycles}</div>
+      <div><span style="color:var(--accent)">PENDING EVAL</span> ${d.pending}</div>
+      <div><span style="color:var(--accent)">EVALUATED</span>&nbsp;&nbsp; ${d.stats?.totalEvaluated ?? 0}</div>
+      <div><span style="color:var(--accent)">SUCCESSES</span>&nbsp;&nbsp; ${d.stats?.successes ?? 0}</div>
+      <div><span style="color:var(--accent)">FAILURES</span>&nbsp;&nbsp;&nbsp; ${d.stats?.failures ?? 0}</div>
+    `;
+
+    renderWeights('l-weights', d.currentWeights || {});
+
+    const acc = d.accuracy;
+    document.getElementById('l-acc-val').textContent =
+      acc !== null && acc !== undefined ? (acc * 100).toFixed(1) + '%' : 'N/A';
+  } catch(e) {
+    document.getElementById('l-status').textContent = 'Cannot reach API.';
+  }
+}
+
+// ══ SIGNAL INJECTION ════════════════════════════
+async function injectSignal() {
+  const token    = document.getElementById('i-token').value.trim().toUpperCase() || 'WIF';
+  const platform = document.getElementById('i-platform').value;
+  const text     = document.getElementById('i-text').value;
+  const likes    = parseInt(document.getElementById('i-likes').value) || 0;
+  const comments = parseInt(document.getElementById('i-comments').value) || 0;
+  const recasts  = parseInt(document.getElementById('i-recasts').value) || 0;
+  const velocity = parseFloat(document.getElementById('i-velocity').value) || 0;
+  const followers= parseInt(document.getElementById('i-followers').value) || 0;
+  const walletUSD= parseInt(document.getElementById('i-wallet').value) || 0;
+
+  const payload = {
+    token, platform, text,
+    metrics: { likes, comments, recasts },
+    velocity,
+    authorFollowers: followers,
+    authorAgeDays: 300,
+    walletData: { balanceUSD: walletUSD, ageDays: 300, txCount: 150, protocolCount: 5 },
+  };
+
+  const box = document.getElementById('inject-result');
+  box.textContent = 'Injecting signal...';
+
+  try {
+    const r = await fetch('/evaluate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const d = await r.json();
+
+    const color = { EXECUTE: '#00ff88', WATCH: '#ffaa00', IGNORE: '#555570', DISCARDED: '#ff3c6e' };
+    box.innerHTML = `<span style="color:${color[d.action]||'#fff'}">${d.action}</span>\n\n` +
+      `ID:         ${d.id}\n` +
+      `TOKEN:      $${token}\n` +
+      `SCORE:      ${(d.score||0).toFixed(2)} / 100\n` +
+      `CONFIDENCE: ${((d.confidence||0)*100).toFixed(1)}%\n` +
+      `NOISE:      ${(d.noiseScore||0).toFixed(3)}\n` +
+      `ACTION:     ${d.action}\n` +
+      `EXECUTED:   ${d.executed ? '✅ YES' : '—'}\n\n` +
+      `BREAKDOWN:\n${JSON.stringify(d.breakdown||{}, null, 2)}`;
+
+    toast(`${d.action} — score: ${(d.score||0).toFixed(0)}`, d.action === 'DISCARDED');
+  } catch(e) {
+    box.textContent = 'ERROR: ' + e.message + '\n\nMake sure HYPELOCK is running on port 3000.';
+    toast('API unreachable', true);
+  }
+}
+
+// ══ PRESETS ═════════════════════════════════════
+function loadPreset(type) {
+  const presets = {
+    whale: { token:'WIF', likes:1200, comments:180, recasts:450, velocity:35, followers:50000, wallet:50000, text:'WIF breaking out, massive whale accumulation' },
+    bot:   { token:'SCAM', likes:5000, comments:2, recasts:2000, velocity:800, followers:3, wallet:0, text:'FREE AIRDROP 100x gem buy now guaranteed profit' },
+    organic:{ token:'BONK', likes:180, comments:60, recasts:90, velocity:8, followers:3500, wallet:1800, text:'BONK ecosystem growing steadily, fundamentals strong' },
+    spam:  { token:'RUG', likes:50, comments:0, recasts:1000, velocity:200, followers:10, wallet:0, text:'GET RICH QUICK send eth dm me moon soon 🚀🚀🚀' },
+  };
+  const p = presets[type];
+  if (!p) return;
+  document.getElementById('i-token').value    = p.token;
+  document.getElementById('i-text').value     = p.text;
+  document.getElementById('i-likes').value    = p.likes;
+  document.getElementById('i-comments').value = p.comments;
+  document.getElementById('i-recasts').value  = p.recasts;
+  document.getElementById('i-velocity').value = p.velocity;
+  document.getElementById('i-followers').value= p.followers;
+  document.getElementById('i-wallet').value   = p.wallet;
+  toast(`Preset loaded: ${type.toUpperCase()}`);
+}
+
+// ══ UTILS ════════════════════════════════════════
+function timeAgo(ts) {
+  if (!ts) return '?';
+  const diff = Date.now() - ts;
+  if (diff < 60000)   return Math.round(diff/1000) + 's ago';
+  if (diff < 3600000) return Math.round(diff/60000) + 'm ago';
+  return Math.round(diff/3600000) + 'h ago';
+}
+
+// ══ INIT ═════════════════════════════════════════
+(async () => {
+  await loadDashboard();
+  setInterval(checkHealth, 10000);
+  setInterval(() => {
+    const page = document.querySelector('.page.active');
+    if (page?.id === 'page-dashboard') loadDashboard();
+    if (page?.id === 'page-signals')   loadSignals();
+  }, 15000);
+
+  // Uptime ticker
+  setInterval(() => {
+    const el = document.getElementById('uptime-ticker');
+    if (el) el.textContent = `HYPELOCK — ${new Date().toLocaleTimeString()} — ATTENTION IS THE ALPHA`;
+  }, 1000);
+})();
+</script>
+</body>
+</html>
