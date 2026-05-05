@@ -2,1154 +2,1279 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>HYPELOCK — Attention Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HYPELOCK</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:       #060608;
-    --bg2:      #0c0c10;
-    --bg3:      #111118;
-    --border:   #1e1e2e;
-    --accent:   #00ff88;
-    --accent2:  #ff3c6e;
-    --accent3:  #ffaa00;
-    --accent4:  #00aaff;
-    --text:     #e0e0f0;
-    --muted:    #555570;
-    --mono:     'Share Tech Mono', monospace;
-    --sans:     'Barlow Condensed', sans-serif;
-  }
+:root {
+  --bg: #04040a;
+  --surface: #0a0a14;
+  --card: #0e0e1c;
+  --border: rgba(255,255,255,0.06);
+  --green: #00ffaa;
+  --red: #ff2d6e;
+  --yellow: #ffcc00;
+  --blue: #00aaff;
+  --purple: #aa55ff;
+  --text: #f0f0ff;
+  --muted: #44445a;
+  --font-hud: 'Orbitron', monospace;
+  --font-body: 'Inter', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── ANIMATED GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,170,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,170,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* ── HEADER ── */
+header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(10,10,20,0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+.logo {
+  font-family: var(--font-hud);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header-right { display: flex; align-items: center; gap: 10px; }
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(0,255,170,0.08);
+  border: 1px solid rgba(0,255,170,0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 1px;
+}
+.live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.offline-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(255,45,110,0.08);
+  border: 1px solid rgba(255,45,110,0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--red);
+  letter-spacing: 1px;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-  /* ── SCANLINE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,255,136,0.012) 2px,
-      rgba(0,255,136,0.012) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: rgba(10,10,20,0.9);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab.active { color: var(--green); border-bottom-color: var(--green); }
+.tab:active { opacity: 0.7; }
 
-  /* ── HEADER ── */
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+/* ── SCROLL CONTAINER ── */
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll::-webkit-scrollbar { width: 3px; }
+.scroll::-webkit-scrollbar-thumb { background: var(--border); }
 
-  .logo {
-    font-family: var(--sans);
-    font-weight: 900;
-    font-size: 22px;
-    letter-spacing: 4px;
-    color: var(--accent);
-    text-shadow: 0 0 20px rgba(0,255,136,0.5);
-  }
-  .logo span { color: var(--muted); font-weight: 300; }
+/* ── PAGES ── */
+.page { display: none; padding: 16px; padding-bottom: 32px; }
+.page.active { display: block; }
 
-  .status-pill {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .status-pill.online  { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.3); }
-  .status-pill.offline { background: rgba(255,60,110,0.1); color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: blink 1.4s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+/* ── BIG HYPE METER ── */
+.hype-meter {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 16px;
+  margin-bottom: 14px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hype-meter::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0,255,170,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.meter-label {
+  font-family: var(--font-hud);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.meter-value {
+  font-family: var(--font-hud);
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: all 0.5s ease;
+}
+.meter-value.green  { color: var(--green); text-shadow: 0 0 30px rgba(0,255,170,0.5); }
+.meter-value.yellow { color: var(--yellow); text-shadow: 0 0 30px rgba(255,204,0,0.5); }
+.meter-value.red    { color: var(--red); text-shadow: 0 0 30px rgba(255,45,110,0.5); }
+.meter-value.muted  { color: var(--muted); text-shadow: none; }
+.meter-sublabel {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
 
-  /* ── NAV TABS ── */
-  .tabs {
-    display: flex;
-    overflow-x: auto;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    scrollbar-width: none;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    flex-shrink: 0;
-    padding: 10px 18px;
-    font-family: var(--sans);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab:hover  { color: var(--text); }
+/* ARC GAUGE */
+.gauge-wrap { position: relative; width: 160px; height: 80px; margin: 0 auto 12px; }
+.gauge-track {
+  width: 160px; height: 80px;
+  border-radius: 80px 80px 0 0;
+  border: 8px solid rgba(255,255,255,0.05);
+  border-bottom: none;
+  position: absolute; top: 0; left: 0;
+}
+.gauge-fill {
+  width: 160px; height: 80px;
+  border-radius: 80px 80px 0 0;
+  border: 8px solid transparent;
+  border-bottom: none;
+  position: absolute; top: 0; left: 0;
+  transition: all 0.8s ease;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+.gauge-fill.green { border-color: var(--green); box-shadow: 0 0 12px rgba(0,255,170,0.5); }
+.gauge-fill.yellow{ border-color: var(--yellow); box-shadow: 0 0 12px rgba(255,204,0,0.5); }
+.gauge-fill.red   { border-color: var(--red); box-shadow: 0 0 12px rgba(255,45,110,0.5); }
 
-  /* ── PAGES ── */
-  .page { display: none; padding: 16px; }
-  .page.active { display: block; }
+/* ── STAT ROW ── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.stat-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--font-hud);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-num.green  { color: var(--green); }
+.stat-num.yellow { color: var(--yellow); }
+.stat-num.red    { color: var(--red); }
+.stat-num.blue   { color: var(--blue); }
+.stat-sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 14px;
-    margin-bottom: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.4;
-  }
-  .card-title {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
 
-  /* ── STAT GRID ── */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .stat {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 12px;
-    text-align: center;
-  }
-  .stat-val {
-    font-family: var(--mono);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    text-shadow: 0 0 16px rgba(0,255,136,0.4);
-  }
-  .stat-val.red    { color: var(--accent2); text-shadow: 0 0 16px rgba(255,60,110,0.4); }
-  .stat-val.yellow { color: var(--accent3); text-shadow: 0 0 16px rgba(255,170,0,0.4); }
-  .stat-val.blue   { color: var(--accent4); text-shadow: 0 0 16px rgba(0,170,255,0.4); }
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
+/* ── SIGNAL CARDS ── */
+.signal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.signal-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.signal-card.EXECUTE::before { background: var(--green); }
+.signal-card.WATCH::before   { background: var(--yellow); }
+.signal-card.IGNORE::before  { background: var(--muted); }
+.signal-card.DISCARDED::before { background: var(--red); }
+.signal-card.EXECUTE { border-color: rgba(0,255,170,0.15); }
+.signal-card.WATCH   { border-color: rgba(255,204,0,0.15); }
 
-  /* ── SIGNAL FEED ── */
-  .signal-item {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--muted);
-    border-radius: 3px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    transition: border-color 0.2s;
-    cursor: pointer;
-  }
-  .signal-item.EXECUTE { border-left-color: var(--accent); }
-  .signal-item.WATCH   { border-left-color: var(--accent3); }
-  .signal-item.IGNORE  { border-left-color: var(--muted); }
-  .signal-item.DISCARDED { border-left-color: var(--accent2); opacity: 0.5; }
+.signal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.signal-token-wrap { display: flex; align-items: center; gap: 10px; }
+.token-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-hud);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.token-icon.green  { background: rgba(0,255,170,0.12); color: var(--green); border: 1px solid rgba(0,255,170,0.2); }
+.token-icon.yellow { background: rgba(255,204,0,0.12); color: var(--yellow); border: 1px solid rgba(255,204,0,0.2); }
+.token-icon.muted  { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+.signal-token-name {
+  font-family: var(--font-hud);
+  font-size: 15px;
+  font-weight: 700;
+}
+.signal-platform {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.action-pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.action-pill.EXECUTE { background: rgba(0,255,170,0.12); color: var(--green); border: 1px solid rgba(0,255,170,0.25); }
+.action-pill.WATCH   { background: rgba(255,204,0,0.12); color: var(--yellow); border: 1px solid rgba(255,204,0,0.25); }
+.action-pill.IGNORE  { background: rgba(68,68,90,0.3); color: var(--muted); border: 1px solid var(--border); }
+.action-pill.DISCARDED { background: rgba(255,45,110,0.1); color: var(--red); border: 1px solid rgba(255,45,110,0.2); }
 
-  .signal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-  .signal-token {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .signal-action {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 2px;
-    letter-spacing: 1px;
-  }
-  .signal-action.EXECUTE  { background: rgba(0,255,136,0.15); color: var(--accent); }
-  .signal-action.WATCH    { background: rgba(255,170,0,0.15); color: var(--accent3); }
-  .signal-action.IGNORE   { background: rgba(85,85,112,0.2); color: var(--muted); }
-  .signal-action.DISCARDED{ background: rgba(255,60,110,0.15); color: var(--accent2); }
+/* SCORE BAR */
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.score-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.score-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+.score-bar.green  { background: linear-gradient(90deg, #00aaff, #00ffaa); }
+.score-bar.yellow { background: linear-gradient(90deg, #ff8800, #ffcc00); }
+.score-bar.muted  { background: var(--muted); }
+.score-num {
+  font-family: var(--font-hud);
+  font-size: 14px;
+  font-weight: 700;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.score-num.green  { color: var(--green); }
+.score-num.yellow { color: var(--yellow); }
+.score-num.muted  { color: var(--muted); }
 
-  .signal-meta {
-    display: flex;
-    gap: 12px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .signal-meta span { display: flex; align-items: center; gap: 3px; }
+.signal-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+}
 
-  .score-bar {
-    height: 3px;
-    background: var(--border);
-    border-radius: 2px;
-    margin-top: 8px;
-    overflow: hidden;
-  }
-  .score-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent4), var(--accent));
-    transition: width 0.5s ease;
-  }
+/* ── RADAR ANIMATION (empty state) ── */
+.radar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
+.radar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,255,170,0.15);
+  position: relative;
+  margin-bottom: 16px;
+}
+.radar::before, .radar::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}
+.radar::before { width: 50%; height: 50%; border: 1px solid rgba(0,255,170,0.1); }
+.radar::after  { width: 25%; height: 25%; background: rgba(0,255,170,0.3); }
+.radar-sweep {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 50%; height: 1px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  transform-origin: left center;
+  animation: sweep 3s linear infinite;
+}
+@keyframes sweep { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.radar-text { font-size: 13px; color: var(--muted); text-align: center; line-height: 1.6; }
 
-  /* ── WEIGHT BARS ── */
-  .weight-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-  .weight-name {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    width: 120px;
-    flex-shrink: 0;
-  }
-  .weight-track {
-    flex: 1;
-    height: 6px;
-    background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .weight-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent4), var(--accent));
-    border-radius: 3px;
-    transition: width 0.8s ease;
-  }
-  .weight-pct {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    width: 36px;
-    text-align: right;
-  }
+/* ── INJECT PAGE ── */
+.inject-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.form-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+input, select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  margin-bottom: 14px;
+}
+input:focus, select:focus { border-color: rgba(0,255,170,0.4); }
+select option { background: #0e0e1c; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid .form-group { margin-bottom: 0; }
+.form-group { margin-bottom: 0; }
 
-  /* ── INJECT FORM ── */
-  .form-group { margin-bottom: 12px; }
-  .form-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    display: block;
-  }
-  input, select {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-  input:focus, select:focus { border-color: var(--accent); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-inject {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,255,170,0.15), rgba(0,170,255,0.15));
+  border: 1px solid rgba(0,255,170,0.3);
+  color: var(--green);
+  font-family: var(--font-hud);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+.btn-inject:active { transform: scale(0.97); }
 
-  .btn {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 3px;
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #000;
-  }
-  .btn-primary:hover { background: #00ffaa; box-shadow: 0 0 20px rgba(0,255,136,0.4); }
-  .btn-primary:active { transform: scale(0.98); }
-  .btn-secondary {
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-  }
+/* PRESETS */
+.preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.preset-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.preset-btn:active { transform: scale(0.95); }
+.preset-icon { font-size: 22px; margin-bottom: 4px; }
+.preset-name { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+.preset-desc { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.preset-btn.whale { border-color: rgba(0,170,255,0.2); }
+.preset-btn.organic { border-color: rgba(0,255,170,0.2); }
+.preset-btn.bot { border-color: rgba(255,204,0,0.2); }
+.preset-btn.spam { border-color: rgba(255,45,110,0.2); }
 
-  /* ── LOG OUTPUT ── */
-  .log-box {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 12px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    max-height: 200px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    word-break: break-all;
-    line-height: 1.6;
-  }
+/* RESULT BOX */
+.result-box {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 80px;
+}
+.result-action {
+  font-family: var(--font-hud);
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.result-action.EXECUTE { color: var(--green); }
+.result-action.WATCH   { color: var(--yellow); }
+.result-action.IGNORE  { color: var(--muted); }
+.result-action.DISCARDED { color: var(--red); }
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.result-row span:last-child { color: var(--text); font-weight: 500; }
+.result-placeholder {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  padding: 16px 0;
+}
 
-  /* ── TUTORIAL ── */
-  .tutorial-step {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px;
-    margin-bottom: 12px;
-    position: relative;
-  }
-  .step-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-  }
-  .step-title {
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .step-body {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 14px;
-    color: #aaa;
-    line-height: 1.6;
-  }
-  .code-inline {
-    font-family: var(--mono);
-    font-size: 11px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 2px 6px;
-    color: var(--accent3);
-  }
-  .code-block {
-    font-family: var(--mono);
-    font-size: 12px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 12px;
-    margin-top: 10px;
-    color: var(--accent3);
-    overflow-x: auto;
-    line-height: 1.6;
-  }
+/* ── LEARNING PAGE ── */
+.learning-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.accuracy-big {
+  text-align: center;
+  padding: 20px 0;
+}
+.accuracy-big .num {
+  font-family: var(--font-hud);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(0,255,170,0.4);
+}
+.accuracy-big .lbl { font-size: 11px; letter-spacing: 2px; color: var(--muted); margin-top: 4px; text-transform: uppercase; }
 
-  /* ── PIPELINE DIAGRAM ── */
-  .pipeline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    padding: 8px 0;
-  }
-  .pipe-node {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text);
-    text-align: center;
-    width: 100%;
-    max-width: 260px;
-    position: relative;
-  }
-  .pipe-node.highlight { border-color: var(--accent); color: var(--accent); }
-  .pipe-arrow {
-    font-family: var(--mono);
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .pipe-desc {
-    font-family: var(--sans);
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    max-width: 260px;
-    margin: 2px 0 4px;
-  }
+.weight-item {
+  margin-bottom: 14px;
+}
+.weight-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.weight-name { font-size: 13px; font-weight: 500; }
+.weight-pct  { font-family: var(--font-hud); font-size: 13px; color: var(--green); }
+.weight-track {
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.weight-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  transition: width 1s ease;
+}
 
-  /* ── CHIP ── */
-  .chip {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 2px;
-    margin: 2px;
-  }
-  .chip-green  { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.2); }
-  .chip-red    { background: rgba(255,60,110,0.1); color: var(--accent2); border: 1px solid rgba(255,60,110,0.2); }
-  .chip-yellow { background: rgba(255,170,0,0.1); color: var(--accent3); border: 1px solid rgba(255,170,0,0.2); }
-  .chip-blue   { background: rgba(0,170,255,0.1); color: var(--accent4); border: 1px solid rgba(0,170,255,0.2); }
+/* ── HOW IT WORKS ── */
+.step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.step-num {
+  font-family: var(--font-hud);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--green);
+  opacity: 0.4;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.step-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.step-body { font-size: 13px; color: #888; line-height: 1.6; }
+.step-body strong { color: var(--text); }
 
-  /* ── UPTIME TICKER ── */
-  .ticker {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    padding: 8px;
-    border-top: 1px solid var(--border);
-  }
+/* NOISE LAYERS */
+.noise-layer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.noise-icon { font-size: 20px; flex-shrink: 0; }
+.noise-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.noise-desc { font-size: 11px; color: var(--muted); }
 
-  /* ── EMPTY STATE ── */
-  .empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-  .empty-icon { font-size: 32px; margin-bottom: 10px; opacity: 0.4; }
+/* ── DECISION CARDS ── */
+.decision-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.decision-card {
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+.decision-card.exec   { background: rgba(0,255,170,0.07); border-color: rgba(0,255,170,0.2); }
+.decision-card.watch  { background: rgba(255,204,0,0.07); border-color: rgba(255,204,0,0.2); }
+.decision-card.ignore { background: rgba(68,68,90,0.15); border-color: var(--border); }
+.decision-icon  { font-size: 22px; margin-bottom: 6px; }
+.decision-label { font-family: var(--font-hud); font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.decision-label.green  { color: var(--green); }
+.decision-label.yellow { color: var(--yellow); }
+.decision-label.muted  { color: var(--muted); }
+.decision-score { font-size: 11px; color: var(--muted); }
 
-  /* ── TOAST ── */
-  #toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--accent);
-    color: #000;
-    font-family: var(--mono);
-    font-size: 12px;
-    padding: 10px 20px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-    transition: transform 0.3s ease;
-    z-index: 9999;
-    white-space: nowrap;
-  }
-  #toast.show { transform: translateX(-50%) translateY(0); }
-  #toast.error { background: var(--accent2); color: #fff; }
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--green);
+  color: #000;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 10px 24px;
+  border-radius: 30px;
+  transition: transform 0.3s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast.error { background: var(--red); color: #fff; }
 
-  .refresh-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 2px;
-    cursor: pointer;
-    float: right;
-  }
-  .refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* LOADER */
+.loader { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0,255,170,0.2); border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-  .mode-badge {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 2px;
-    letter-spacing: 1px;
-  }
-  .mode-paper { background: rgba(255,170,0,0.15); color: var(--accent3); border: 1px solid rgba(255,170,0,0.3); }
-  .mode-live  { background: rgba(255,60,110,0.15); color: var(--accent2); border: 1px solid rgba(255,60,110,0.3); }
-
-  select option { background: var(--bg2); }
-
-  .section-title {
-    font-family: var(--sans);
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-  <div class="logo">HYPE<span>LOCK</span></div>
-  <div style="display:flex;gap:8px;align-items:center;">
-    <div id="modeBadge" class="mode-badge mode-paper">PAPER</div>
-    <div id="statusPill" class="status-pill offline">
-      <span class="dot"></span>
-      <span id="statusText">CONNECTING</span>
+  <div class="logo">HYPELOCK</div>
+  <div class="header-right">
+    <div id="statusBadge" class="offline-badge">
+      <span class="live-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></span>
+      <span id="statusText">OFFLINE</span>
     </div>
   </div>
 </header>
 
-<!-- TABS -->
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('dashboard')">DASHBOARD</div>
-  <div class="tab" onclick="switchTab('signals')">SIGNALS</div>
-  <div class="tab" onclick="switchTab('inject')">INJECT</div>
-  <div class="tab" onclick="switchTab('learning')">LEARNING</div>
-  <div class="tab" onclick="switchTab('tutorial')">TUTORIAL</div>
+  <div class="tab active" onclick="switchTab('radar')">🔴 RADAR</div>
+  <div class="tab" onclick="switchTab('signals')">📡 SIGNALS</div>
+  <div class="tab" onclick="switchTab('inject')">⚡ INJECT</div>
+  <div class="tab" onclick="switchTab('brain')">🧠 AI BRAIN</div>
+  <div class="tab" onclick="switchTab('howto')">📖 HOW IT WORKS</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     DASHBOARD PAGE
-════════════════════════════════════════════════════ -->
-<div class="page active" id="page-dashboard">
+<div class="scroll">
 
-  <div class="stat-grid">
-    <div class="stat">
-      <div class="stat-val" id="d-total">—</div>
-      <div class="stat-label">TOTAL SIGNALS</div>
+<!-- ════════════ RADAR PAGE ════════════ -->
+<div class="page active" id="page-radar">
+
+  <!-- BIG HYPE METER -->
+  <div class="hype-meter">
+    <div class="meter-label">ATTENTION LEVEL</div>
+    <div class="meter-value muted" id="hype-val">—</div>
+    <div class="meter-sublabel" id="hype-label">Connecting to system...</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num green" id="s-total">—</div>
+      <div class="stat-sub">Signals</div>
     </div>
-    <div class="stat">
-      <div class="stat-val" id="d-uptime">—</div>
-      <div class="stat-label">UPTIME (s)</div>
+    <div class="stat-box">
+      <div class="stat-num yellow" id="s-exec">—</div>
+      <div class="stat-sub">Trades</div>
     </div>
-    <div class="stat">
-      <div class="stat-val" id="d-executed">—</div>
-      <div class="stat-label">EXECUTED</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val red" id="d-discarded">—</div>
-      <div class="stat-label">DISCARDED</div>
+    <div class="stat-box">
+      <div class="stat-num red" id="s-noise">—</div>
+      <div class="stat-sub">Blocked</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">SYSTEM STATUS</div>
-    <div id="d-status-rows" style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--muted);">
-      Connecting to HYPELOCK API...
+  <!-- MODE BANNER -->
+  <div id="mode-banner" style="background:rgba(255,204,0,0.07);border:1px solid rgba(255,204,0,0.2);border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;">
+    <div style="font-size:24px;">📄</div>
+    <div>
+      <div style="font-weight:700;font-size:14px;color:var(--yellow);margin-bottom:2px;">PAPER MODE — Safe Simulation</div>
+      <div style="font-size:12px;color:#888;">All trades are simulated. No real money involved.</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">ACTIVE WEIGHTS</div>
-    <div id="d-weights">
-      <div class="empty"><div class="empty-icon">⚖</div>Loading weights...</div>
+  <!-- RECENT SIGNALS -->
+  <div class="section-label">LATEST SIGNALS</div>
+  <div id="recent-feed">
+    <div class="radar-wrap">
+      <div class="radar"><div class="radar-sweep"></div></div>
+      <div class="radar-text">Scanning social networks...<br>First signals will appear here</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">RECENT ACTIVITY <button class="refresh-btn" onclick="loadDashboard()">↻ REFRESH</button></div>
-    <div id="d-recent">
-      <div class="empty"><div class="empty-icon">📡</div>No signals yet</div>
-    </div>
-  </div>
+  <button onclick="loadRadar()" style="width:100%;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;cursor:pointer;letter-spacing:1px;">↻ REFRESH</button>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     SIGNALS PAGE
-════════════════════════════════════════════════════ -->
+<!-- ════════════ SIGNALS PAGE ════════════ -->
 <div class="page" id="page-signals">
 
-  <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center;">
-    <select id="filterAction" onchange="loadSignals()" style="flex:1;">
-      <option value="">ALL ACTIONS</option>
-      <option value="EXECUTE">EXECUTE</option>
-      <option value="WATCH">WATCH</option>
-      <option value="IGNORE">IGNORE</option>
-      <option value="DISCARDED">DISCARDED</option>
+  <div style="display:flex;gap:10px;margin-bottom:14px;">
+    <select id="sig-filter" onchange="loadSignals()" style="margin-bottom:0;flex:1;">
+      <option value="">ALL SIGNALS</option>
+      <option value="EXECUTE">🟢 EXECUTE</option>
+      <option value="WATCH">🟡 WATCH</option>
+      <option value="IGNORE">⚪ IGNORE</option>
+      <option value="DISCARDED">🔴 BLOCKED</option>
     </select>
-    <button class="refresh-btn" style="float:none;" onclick="loadSignals()">↻</button>
+    <button onclick="loadSignals()" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:0 16px;color:var(--muted);cursor:pointer;font-size:14px;flex-shrink:0;">↻</button>
   </div>
 
   <div id="signals-feed">
-    <div class="empty"><div class="empty-icon">📡</div>No signals yet.<br>System is collecting...</div>
+    <div class="radar-wrap">
+      <div class="radar"><div class="radar-sweep"></div></div>
+      <div class="radar-text">No signals yet</div>
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     INJECT PAGE
-════════════════════════════════════════════════════ -->
+<!-- ════════════ INJECT PAGE ════════════ -->
 <div class="page" id="page-inject">
 
-  <div class="card">
-    <div class="card-title">MANUAL SIGNAL INJECTION</div>
-    <p style="font-family:var(--sans);font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;">
-      Inject a test signal directly into the pipeline. Useful for calibrating the Alpha Filter and Scorer without waiting for real social data.
-    </p>
+  <div class="inject-card">
+    <div class="section-label" style="margin-bottom:16px;">CHOOSE SCENARIO</div>
+    <div class="preset-grid">
+      <div class="preset-btn whale" onclick="loadPreset('whale')">
+        <div class="preset-icon">🐳</div>
+        <div class="preset-name">Whale</div>
+        <div class="preset-desc">Big money signal</div>
+      </div>
+      <div class="preset-btn organic" onclick="loadPreset('organic')">
+        <div class="preset-icon">🌱</div>
+        <div class="preset-name">Organic</div>
+        <div class="preset-desc">Real community hype</div>
+      </div>
+      <div class="preset-btn bot" onclick="loadPreset('bot')">
+        <div class="preset-icon">🤖</div>
+        <div class="preset-name">Bot Attack</div>
+        <div class="preset-desc">Fake engagement</div>
+      </div>
+      <div class="preset-btn spam" onclick="loadPreset('spam')">
+        <div class="preset-icon">🚫</div>
+        <div class="preset-name">Spam</div>
+        <div class="preset-desc">Should be blocked</div>
+      </div>
+    </div>
+  </div>
 
-    <div class="form-row">
+  <div class="inject-card">
+    <div class="section-label" style="margin-bottom:16px;">SIGNAL PARAMETERS</div>
+
+    <div class="form-grid">
       <div class="form-group">
-        <label class="form-label">TOKEN</label>
-        <input type="text" id="i-token" placeholder="WIF" value="WIF">
+        <label class="form-label">Token</label>
+        <input type="text" id="i-token" placeholder="WIF" value="WIF" style="text-transform:uppercase;">
       </div>
       <div class="form-group">
-        <label class="form-label">PLATFORM</label>
+        <label class="form-label">Platform</label>
         <select id="i-platform">
-          <option value="farcaster">FARCASTER</option>
-          <option value="x">X</option>
-          <option value="zora">ZORA</option>
+          <option value="farcaster">Farcaster</option>
+          <option value="x">X / Twitter</option>
+          <option value="zora">Zora</option>
         </select>
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">SIGNAL TEXT</label>
-      <input type="text" id="i-text" placeholder="WIF is pumping hard right now">
-    </div>
+    <label class="form-label">Signal text</label>
+    <input type="text" id="i-text" placeholder="What's being said about this token?">
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
-        <label class="form-label">LIKES</label>
-        <input type="number" id="i-likes" placeholder="300" value="300">
+        <label class="form-label">Likes</label>
+        <input type="number" id="i-likes" value="300">
       </div>
       <div class="form-group">
-        <label class="form-label">COMMENTS</label>
-        <input type="number" id="i-comments" placeholder="50" value="50">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">RECASTS</label>
-        <input type="number" id="i-recasts" placeholder="120" value="120">
-      </div>
-      <div class="form-group">
-        <label class="form-label">VELOCITY</label>
-        <input type="number" id="i-velocity" placeholder="15" value="15" step="0.1">
+        <label class="form-label">Comments</label>
+        <input type="number" id="i-comments" value="50">
       </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-grid">
       <div class="form-group">
-        <label class="form-label">FOLLOWERS</label>
-        <input type="number" id="i-followers" placeholder="8000" value="8000">
+        <label class="form-label">Shares / Recasts</label>
+        <input type="number" id="i-recasts" value="120">
       </div>
       <div class="form-group">
-        <label class="form-label">WALLET USD</label>
-        <input type="number" id="i-wallet" placeholder="2500" value="2500">
+        <label class="form-label">Velocity (eng/h)</label>
+        <input type="number" id="i-velocity" value="15" step="0.1">
       </div>
     </div>
 
-    <button class="btn btn-primary" onclick="injectSignal()" style="margin-bottom:12px;">
-      ⚡ INJECT SIGNAL
-    </button>
-
-    <!-- PRESETS -->
-    <div style="margin-bottom:12px;">
-      <div class="card-title">QUICK PRESETS</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;">
-        <button class="btn btn-secondary" onclick="loadPreset('whale')" style="width:auto;padding:6px 12px;font-size:11px;">🐳 WHALE</button>
-        <button class="btn btn-secondary" onclick="loadPreset('bot')" style="width:auto;padding:6px 12px;font-size:11px;">🤖 BOT ATTACK</button>
-        <button class="btn btn-secondary" onclick="loadPreset('organic')" style="width:auto;padding:6px 12px;font-size:11px;">🌱 ORGANIC</button>
-        <button class="btn btn-secondary" onclick="loadPreset('spam')" style="width:auto;padding:6px 12px;font-size:11px;">🚫 SPAM</button>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Followers</label>
+        <input type="number" id="i-followers" value="8000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Wallet ($USD)</label>
+        <input type="number" id="i-wallet" value="2500">
       </div>
     </div>
 
-    <div class="card-title">RESULT</div>
-    <div class="log-box" id="inject-result">Awaiting injection...</div>
+    <button class="btn-inject" onclick="injectSignal()">⚡ SEND TO HYPELOCK AI</button>
+
+    <!-- RESULT -->
+    <div class="section-label" style="margin-bottom:12px;">AI VERDICT</div>
+    <div class="result-box" id="result-box">
+      <div class="result-placeholder">Hit a preset or fill the form and press inject</div>
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     LEARNING PAGE
-════════════════════════════════════════════════════ -->
-<div class="page" id="page-learning">
+<!-- ════════════ AI BRAIN PAGE ════════════ -->
+<div class="page" id="page-brain">
 
-  <div class="card">
-    <div class="card-title">LEARNING LOOP STATUS <button class="refresh-btn" onclick="loadLearning()">↻</button></div>
-    <div id="l-status" style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--muted);">
+  <div class="learning-card">
+    <div class="section-label" style="margin-bottom:16px;">HIT RATE</div>
+    <div class="accuracy-big">
+      <div class="num" id="l-acc">—</div>
+      <div class="lbl">of EXECUTE signals were correct</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.6;">
+      The AI improves over time by learning which signals led to real price moves.
+    </div>
+  </div>
+
+  <div class="learning-card">
+    <div class="section-label" style="margin-bottom:16px;">WHAT THE AI VALUES MOST</div>
+    <div id="brain-weights">
+      <div class="radar-wrap" style="padding:20px 0;">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learning-card">
+    <div class="section-label" style="margin-bottom:16px;">LEARNING STATS</div>
+    <div id="brain-stats" style="font-size:13px;color:var(--muted);line-height:2.2;">
       Loading...
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">CURRENT INDICATOR WEIGHTS</div>
-    <div id="l-weights">
-      <div class="empty"><div class="empty-icon">⚖</div>Loading...</div>
+  <div style="background:rgba(0,255,170,0.04);border:1px solid rgba(0,255,170,0.12);border-radius:16px;padding:20px;margin-bottom:14px;">
+    <div style="font-weight:700;font-size:15px;margin-bottom:8px;">🔄 How the AI learns</div>
+    <div style="font-size:13px;color:#888;line-height:1.7;">
+      Every 10 minutes the system checks if signals that got an <strong style="color:var(--green)">EXECUTE</strong> verdict actually led to increased engagement.<br><br>
+      If yes → it boosts the weight of whatever indicators fired.<br>
+      If no → it reduces those weights.<br><br>
+      Over time the AI gets smarter at separating real hype from fake noise.
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">ACCURACY</div>
-    <div id="l-accuracy" style="text-align:center;padding:20px 0;">
-      <div class="stat-val" id="l-acc-val" style="font-size:48px;">—</div>
-      <div class="stat-label">EXECUTE HIT RATE</div>
-      <p style="font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:10px;">
-        % of EXECUTE signals that resulted in successful outcome (engagement ≥1.5× baseline)
-      </p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">HOW LEARNING WORKS</div>
-    <div style="font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;">
-      Every 10 minutes the loop evaluates signal outcomes at <span class="chip chip-blue">1h</span> and <span class="chip chip-blue">24h</span> windows.<br><br>
-      ✅ <span style="color:var(--accent)">Success</span> → top-3 contributing indicators get weight <strong style="color:var(--text)">increased</strong><br>
-      ❌ <span style="color:var(--accent2)">Failure</span> → top-3 contributing indicators get weight <strong style="color:var(--text)">decreased</strong><br><br>
-      Weights are always normalized to sum to 1.0. Min weight: 0.02. Max: 0.50.
-    </div>
-  </div>
+  <button onclick="loadBrain()" style="width:100%;padding:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;cursor:pointer;letter-spacing:1px;">↻ REFRESH</button>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     TUTORIAL PAGE
-════════════════════════════════════════════════════ -->
-<div class="page" id="page-tutorial">
+<!-- ════════════ HOW IT WORKS ════════════ -->
+<div class="page" id="page-howto">
 
-  <div class="section-title">FULL TUTORIAL</div>
-
-  <!-- PIPELINE DIAGRAM -->
-  <div class="card">
-    <div class="card-title">SYSTEM PIPELINE</div>
-    <div class="pipeline">
-      <div class="pipe-node highlight">DATA SOURCES</div>
-      <div class="pipe-desc">Farcaster · X · Zora</div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-node highlight">ALPHA FILTER v2</div>
-      <div class="pipe-desc">5-layer noise removal</div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-node highlight">ADAPTIVE SCORER</div>
-      <div class="pipe-desc">Dynamic weight scoring</div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-node highlight">DECISION ENGINE</div>
-      <div class="pipe-desc">EXECUTE · WATCH · IGNORE</div>
-      <div class="pipe-arrow" style="display:flex;gap:20px;justify-content:center;">↙&nbsp;&nbsp;&nbsp;↘</div>
-      <div style="display:flex;gap:8px;width:100%;max-width:260px;">
-        <div class="pipe-node" style="flex:1;font-size:11px;">EXECUTION<br><span style="color:var(--muted)">Bankr/Paper</span></div>
-        <div class="pipe-node" style="flex:1;font-size:11px;">DISTRIBUTION<br><span style="color:var(--muted)">X·FC·Zora</span></div>
-      </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="pipe-node highlight">LEARNING LOOP</div>
-      <div class="pipe-desc">Weight adjustment ← feedback</div>
-    </div>
-  </div>
-
-  <!-- STEPS -->
-  <div class="tutorial-step">
-    <div class="step-num">STEP 01</div>
-    <div class="step-title">SETUP & START</div>
-    <div class="step-body">
-      Wejdź do folderu projektu i uruchom w trybie PAPER (bezpiecznym):
-      <div class="code-block">cd ~/Hyperlock/hypelock
-npm install
-npm run paper</div>
-      System startuje na porcie 3000. Dashboard dostępny pod:
-      <div class="code-block">http://localhost:3000</div>
-    </div>
-  </div>
-
-  <div class="tutorial-step">
-    <div class="step-num">STEP 02</div>
-    <div class="step-title">KONFIGURACJA TOKENÓW</div>
-    <div class="step-body">
-      Domyślnie system monitoruje: <span class="chip chip-green">WIF</span><span class="chip chip-green">BONK</span><span class="chip chip-green">POPCAT</span><span class="chip chip-green">PENGU</span><span class="chip chip-green">MOODENG</span><br><br>
-      Możesz zmienić przez zmienną środowiskową w <span class="code-inline">.env</span>:
-      <div class="code-block">WATCH_TOKENS=WIF,BONK,MYTOKEN,SOL</div>
-      Lub dynamicznie przez API:
-      <div class="code-block">curl -X POST http://localhost:3000/tokens \
-  -H "Content-Type: application/json" \
-  -d '{"token":"NEWTOKEN"}'</div>
-    </div>
-  </div>
-
-  <div class="tutorial-step">
-    <div class="step-num">STEP 03</div>
-    <div class="step-title">ALPHA FILTER — JAK DZIAŁA</div>
-    <div class="step-body">
-      Każdy sygnał przechodzi przez 5 warstw filtracji:<br><br>
-      <span class="chip chip-red">L1</span> <strong>Bot pattern</strong> — wysoki ratio likes/komentarze, okrągłe liczby, nowe konta<br>
-      <span class="chip chip-red">L2</span> <strong>Spam keywords</strong> — "free airdrop", "100x gem", nadmiar hashtagów<br>
-      <span class="chip chip-red">L3</span> <strong>Velocity spike</strong> — engagement >5× powyżej baseline w 60s<br>
-      <span class="chip chip-red">L4</span> <strong>Source repetition</strong> — te same konta angażujące się wielokrotnie<br>
-      <span class="chip chip-red">L5</span> <strong>Coordination</strong> — 5+ aktorów synchronizujących akcje w 30s<br><br>
-      Jeśli <span class="code-inline">noiseScore > 0.65</span> → sygnał jest DISCARDED.
-    </div>
-  </div>
-
-  <div class="tutorial-step">
-    <div class="step-num">STEP 04</div>
-    <div class="step-title">SCORING — DECYZJE</div>
-    <div class="step-body">
-      Po przejściu filtra sygnał jest scorowany (0-100):
+  <div style="background:linear-gradient(135deg,rgba(0,255,170,0.05),rgba(0,170,255,0.05));border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;">
+    <div style="font-family:var(--font-hud);font-size:13px;font-weight:700;color:var(--green);letter-spacing:2px;margin-bottom:8px;">WHAT IS HYPELOCK?</div>
+    <div style="font-size:14px;color:#aaa;line-height:1.7;">
+      HYPELOCK monitors <strong style="color:var(--text)">Farcaster, X, and Zora</strong> in real time, filters out bots and spam, and scores the <em>genuine quality</em> of crypto hype around any token.
       <br><br>
-      <span class="chip chip-green">EXECUTE</span> effective score ≥ 75 → uruchamia trade<br>
-      <span class="chip chip-yellow">WATCH</span> effective score ≥ 40 → monitoruj<br>
-      <span class="chip chip-blue">IGNORE</span> effective score < 40 → pomiń<br><br>
-      <em>Effective score = raw score × (0.5 + 0.5 × confidence)</em><br><br>
-      Przetestuj zakładkę <strong>INJECT</strong> żeby zobaczyć jak różne sygnały są scorowane.
+      When a signal is strong enough — it can automatically execute a trade or publish content to create more signal.
     </div>
   </div>
 
-  <div class="tutorial-step">
-    <div class="step-num">STEP 05</div>
-    <div class="step-title">PAPER MODE vs LIVE MODE</div>
-    <div class="step-body">
-      <span class="chip chip-yellow">PAPER</span> Wszystkie EXECUTE są symulowane. Zero realnych transakcji. Logi pokazują estimated PnL.<br><br>
-      <span class="chip chip-red">LIVE</span> Wymaga klucza Bankr API w <span class="code-inline">.env</span>:<br>
-      <div class="code-block">PAPER_MODE=false
-BANKR_API_KEY=twoj_klucz</div>
-      Następnie:
-      <div class="code-block">npm run live</div>
-      ⚠️ Upewnij się że system działa poprawnie przez kilka dni w PAPER zanim przełączysz.
+  <!-- DECISION CARDS -->
+  <div class="section-label" style="margin-bottom:12px;">POSSIBLE VERDICTS</div>
+  <div class="decision-cards">
+    <div class="decision-card exec">
+      <div class="decision-icon">🔴</div>
+      <div class="decision-label green">EXECUTE</div>
+      <div class="decision-score">Score ≥ 75</div>
+    </div>
+    <div class="decision-card watch">
+      <div class="decision-icon">👀</div>
+      <div class="decision-label yellow">WATCH</div>
+      <div class="decision-score">Score ≥ 40</div>
+    </div>
+    <div class="decision-card ignore">
+      <div class="decision-icon">🔇</div>
+      <div class="decision-label muted">IGNORE</div>
+      <div class="decision-score">Score < 40</div>
     </div>
   </div>
 
-  <div class="tutorial-step">
-    <div class="step-num">STEP 06</div>
-    <div class="step-title">INTEGRACJE API</div>
-    <div class="step-body">
-      Uzupełnij <span class="code-inline">.env</span> żeby odblokować realne źródła danych:<br><br>
-      <span class="chip chip-blue">FARCASTER</span> Utwórz konto na neynar.com → skopiuj Signer UUID i FID<br>
-      <span class="chip chip-blue">X/TWITTER</span> developer.twitter.com → App-only Bearer Token (read) + OAuth 1.0a (write)<br>
-      <span class="chip chip-blue">ZORA</span> zora.co/manage → API Key<br><br>
-      Bez kluczy system działa w dry-run dla dystrybucji (logi co by opublikował).
+  <!-- PIPELINE STEPS -->
+  <div class="section-label" style="margin-bottom:12px;">THE PIPELINE</div>
+
+  <div class="step-card">
+    <div class="step-num">01</div>
+    <div>
+      <div class="step-title">Data Collection</div>
+      <div class="step-body">Every 30 seconds the system fetches fresh posts from <strong>Farcaster</strong>, <strong>X</strong>, and trending mints from <strong>Zora</strong> — looking for tokens you're watching.</div>
     </div>
   </div>
 
-  <div class="tutorial-step">
-    <div class="step-num">STEP 07</div>
-    <div class="step-title">API ENDPOINTS</div>
-    <div class="step-body">
-      Pełne API dostępne na localhost:3000:<br>
-      <div class="code-block">GET  /health          → status systemu
-GET  /signals         → feed sygnałów
-GET  /signals?action=EXECUTE
-GET  /signals?limit=20
-POST /evaluate        → wstrzyknij sygnał
-GET  /learning/status → wagi i learning
-GET  /stats           → pełne statystyki
-POST /tokens          → dodaj token</div>
+  <div class="step-card">
+    <div class="step-num">02</div>
+    <div>
+      <div class="step-title">Alpha Filter v2 — Noise Removal</div>
+      <div class="step-body">Every signal passes 5 filters before being scored:</div>
+      <div style="margin-top:12px;">
+        <div class="noise-layer">
+          <div class="noise-icon">🤖</div>
+          <div><div class="noise-name">Bot Detection</div><div class="noise-desc">Unnatural like/comment ratios, round numbers, new accounts</div></div>
+        </div>
+        <div class="noise-layer">
+          <div class="noise-icon">🚫</div>
+          <div><div class="noise-name">Spam Keywords</div><div class="noise-desc">"free airdrop", "100x gem", "guaranteed profit"...</div></div>
+        </div>
+        <div class="noise-layer">
+          <div class="noise-icon">📈</div>
+          <div><div class="noise-name">Velocity Spike</div><div class="noise-desc">Engagement 5× above normal baseline in 60s window</div></div>
+        </div>
+        <div class="noise-layer">
+          <div class="noise-icon">🔁</div>
+          <div><div class="noise-name">Source Repetition</div><div class="noise-desc">Same accounts engaging repeatedly = coordinated shilling</div></div>
+        </div>
+        <div class="noise-layer">
+          <div class="noise-icon">🎭</div>
+          <div><div class="noise-name">Coordination</div><div class="noise-desc">5+ accounts acting in sync within 30 seconds</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="tutorial-step">
-    <div class="step-num">STEP 08</div>
-    <div class="step-title">DEPLOYMENT NA RAILWAY</div>
-    <div class="step-body">
-      Żeby uruchomić 24/7 na Railway:<br>
-      <div class="code-block">1. Push repo na GitHub (już zrobione)
-2. railway.app → New Project → GitHub
-3. Wybierz HazEOskA/Hyperlock
-4. Set Root Directory: hypelock
-5. Ustaw zmienne środowiskowe w Railway
-6. Deploy</div>
-      Railway automatycznie wykryje <span class="code-inline">npm start</span>.
+  <div class="step-card">
+    <div class="step-num">03</div>
+    <div>
+      <div class="step-title">Adaptive Scoring</div>
+      <div class="step-body">Clean signals are scored 0–100 across 6 indicators: <strong>likes, comments, shares, velocity, wallet quality,</strong> and <strong>engagement acceleration</strong>. The AI dynamically adjusts the weight of each indicator based on past performance.</div>
     </div>
   </div>
 
-  <!-- TICKER at bottom -->
-  <div class="ticker" id="uptime-ticker">HYPELOCK — ATTENTION IS THE ALPHA</div>
+  <div class="step-card">
+    <div class="step-num">04</div>
+    <div>
+      <div class="step-title">Execution & Distribution</div>
+      <div class="step-body">High-score signals trigger an action. In <strong>PAPER MODE</strong> this is a simulated trade. In LIVE MODE a real trade goes through Bankr. Either way, the signal is also published to X, Farcaster, and Zora to create new attention loops.</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">05</div>
+    <div>
+      <div class="step-title">Self-Learning Loop</div>
+      <div class="step-body">After 1h and 24h the system checks if its EXECUTE signals actually led to more engagement. It adjusts indicator weights accordingly — getting smarter with every cycle.</div>
+    </div>
+  </div>
+
+  <!-- API quick ref -->
+  <div class="section-label" style="margin-bottom:12px;">API QUICK REF</div>
+  <div style="background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:12px;padding:16px;font-family:monospace;font-size:12px;color:#888;line-height:2.2;margin-bottom:14px;">
+    <div><span style="color:var(--blue)">GET</span> &nbsp;<span style="color:var(--text)">/health</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ system status</div>
+    <div><span style="color:var(--blue)">GET</span> &nbsp;<span style="color:var(--text)">/signals</span> &nbsp;&nbsp;&nbsp;&nbsp;→ signal feed</div>
+    <div><span style="color:var(--green)">POST</span> <span style="color:var(--text)">/evaluate</span> &nbsp;&nbsp;&nbsp;→ inject signal</div>
+    <div><span style="color:var(--blue)">GET</span> &nbsp;<span style="color:var(--text)">/learning/status</span> → AI weights</div>
+    <div><span style="color:var(--blue)">GET</span> &nbsp;<span style="color:var(--text)">/stats</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ full stats</div>
+    <div><span style="color:var(--green)">POST</span> <span style="color:var(--text)">/tokens</span> &nbsp;&nbsp;&nbsp;&nbsp;→ add token</div>
+  </div>
+
 </div>
 
-<!-- TOAST -->
-<div id="toast">Signal injected</div>
+</div><!-- /scroll -->
+
+<div id="toast"></div>
 
 <script>
-const API = ''; // same origin — served by Express
-
-// ══ TAB SWITCHING ════════════════════════════════
+// ═══════════ TABS ═══════════
+const TAB_NAMES = ['radar','signals','inject','brain','howto'];
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i) => {
-    const names = ['dashboard','signals','inject','learning','tutorial'];
-    t.classList.toggle('active', names[i] === name);
-  });
-  document.querySelectorAll('.page').forEach(p => {
-    p.classList.toggle('active', p.id === 'page-'+name);
-  });
-  if (name === 'dashboard') loadDashboard();
-  if (name === 'signals')   loadSignals();
-  if (name === 'learning')  loadLearning();
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', TAB_NAMES[i] === name));
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-'+name));
+  document.querySelector('.scroll').scrollTop = 0;
+  if (name === 'radar')   loadRadar();
+  if (name === 'signals') loadSignals();
+  if (name === 'brain')   loadBrain();
 }
 
-// ══ TOAST ════════════════════════════════════════
-function toast(msg, isError=false) {
+// ═══════════ TOAST ═══════════
+function toast(msg, err=false) {
   const el = document.getElementById('toast');
   el.textContent = msg;
-  el.className = isError ? 'error show' : 'show';
-  setTimeout(() => el.className = isError ? 'error' : '', 2500);
+  el.className = (err ? 'error ' : '') + 'show';
+  setTimeout(() => el.className = err ? 'error' : '', 2500);
 }
 
-// ══ HEALTH CHECK ════════════════════════════════
+// ═══════════ HEALTH ═══════════
 async function checkHealth() {
   try {
     const r = await fetch('/health', { signal: AbortSignal.timeout(3000) });
     const d = await r.json();
-    const pill = document.getElementById('statusPill');
-    const txt  = document.getElementById('statusText');
-    pill.className = 'status-pill online';
-    txt.textContent = 'ONLINE';
+    const badge = document.getElementById('statusBadge');
+    badge.className = 'live-badge';
+    badge.innerHTML = '<span class="live-dot"></span><span id="statusText">LIVE</span>';
 
-    const badge = document.getElementById('modeBadge');
-    badge.textContent = d.mode;
-    badge.className = 'mode-badge ' + (d.mode === 'PAPER' ? 'mode-paper' : 'mode-live');
-
-    document.getElementById('d-uptime').textContent = Math.round(d.uptime);
-    document.getElementById('d-total').textContent  = d.signals;
-    return true;
+    // Update mode banner
+    const banner = document.getElementById('mode-banner');
+    if (d.mode === 'LIVE') {
+      banner.style.background = 'rgba(255,45,110,0.07)';
+      banner.style.borderColor = 'rgba(255,45,110,0.2)';
+      banner.innerHTML = '<div style="font-size:24px">🔴</div><div><div style="font-weight:700;font-size:14px;color:var(--red);margin-bottom:2px;">LIVE MODE — Real Execution</div><div style="font-size:12px;color:#888;">EXECUTE signals trigger real trades via Bankr.</div></div>';
+    }
+    return d;
   } catch {
-    const pill = document.getElementById('statusPill');
-    pill.className = 'status-pill offline';
-    document.getElementById('statusText').textContent = 'OFFLINE';
-    return false;
+    const badge = document.getElementById('statusBadge');
+    badge.className = 'offline-badge';
+    badge.innerHTML = '<span class="live-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></span><span>OFFLINE</span>';
+    return null;
   }
 }
 
-// ══ DASHBOARD ════════════════════════════════════
-async function loadDashboard() {
-  await checkHealth();
+// ═══════════ RADAR ═══════════
+async function loadRadar() {
+  const health = await checkHealth();
+  if (!health) return;
+
   try {
-    const [statsR, sigsR] = await Promise.all([
-      fetch('/stats'),
-      fetch('/signals?limit=5')
-    ]);
+    const [statsR, sigsR] = await Promise.all([fetch('/stats'), fetch('/signals?limit=6')]);
     const stats = await statsR.json();
     const sigs  = await sigsR.json();
 
-    // Stat cards
-    const s = stats.store || {};
-    document.getElementById('d-executed').textContent  = s.executed  ?? '—';
-    document.getElementById('d-discarded').textContent = (s.totalSignals - s.executed - s.watched - s.ignored) || 0;
+    const store = stats.store || {};
+    const exec  = stats.execution || {};
 
-    // Status rows
-    const exec = stats.execution || {};
-    document.getElementById('d-status-rows').innerHTML = `
-      <div><span style="color:var(--accent)">MODE</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${stats.mode || '—'}</div>
-      <div><span style="color:var(--accent)">PAPER TRADES</span>&nbsp; ${exec.simulatedOrders ?? 0}</div>
-      <div><span style="color:var(--accent)">REAL ORDERS</span>&nbsp;&nbsp; ${exec.realOrders ?? 0}</div>
-      <div><span style="color:var(--accent)">EST. PAPER PnL</span> $${exec.estimatedPaperPnl ?? '0.00'}</div>
-      <div><span style="color:var(--accent)">TOKENS WATCHED</span> ${(stats.tokens||[]).join(', ')}</div>
-    `;
+    // Update stats
+    document.getElementById('s-total').textContent = store.totalSignals ?? 0;
+    document.getElementById('s-exec').textContent  = exec.simulatedOrders ?? 0;
+    document.getElementById('s-noise').textContent = (store.totalSignals ?? 0) - (store.executed ?? 0) - (store.watched ?? 0) - (store.ignored ?? 0);
 
-    // Weights
-    renderWeights('d-weights', s.weights || {});
+    // Big hype meter — use last signal score or average
+    const allSigs = sigs.signals || [];
+    const topScore = allSigs.length ? Math.max(...allSigs.map(s => s.score || 0)) : 0;
+    updateHypeMeter(topScore, allSigs.length);
 
-    // Recent signals
-    const feed = document.getElementById('d-recent');
-    if (!sigs.signals || !sigs.signals.length) {
-      feed.innerHTML = '<div class="empty"><div class="empty-icon">📡</div>No signals yet. System is collecting data...</div>';
+    // Recent feed
+    const feed = document.getElementById('recent-feed');
+    if (!allSigs.length) {
+      feed.innerHTML = `<div class="radar-wrap">
+        <div class="radar"><div class="radar-sweep"></div></div>
+        <div class="radar-text">Scanning social networks...<br>First signals appear here</div>
+      </div>`;
     } else {
-      feed.innerHTML = sigs.signals.map(renderSignalMini).join('');
+      feed.innerHTML = allSigs.map(renderCard).join('');
     }
-  } catch(e) {
-    console.error(e);
+  } catch(e) { console.error(e); }
+}
+
+function updateHypeMeter(score, count) {
+  const el    = document.getElementById('hype-val');
+  const label = document.getElementById('hype-label');
+
+  if (count === 0) {
+    el.className = 'meter-value muted';
+    el.textContent = '—';
+    label.textContent = 'No signals yet — scanning...';
+    return;
+  }
+
+  el.textContent = Math.round(score);
+  if (score >= 75) {
+    el.className = 'meter-value green';
+    label.textContent = '🔥 HIGH ATTENTION DETECTED';
+  } else if (score >= 40) {
+    el.className = 'meter-value yellow';
+    label.textContent = '👀 MODERATE SIGNAL — Watching';
+  } else {
+    el.className = 'meter-value muted';
+    label.textContent = 'Low signal environment — filtering noise';
   }
 }
 
-// ══ SIGNALS FEED ════════════════════════════════
+// ═══════════ SIGNALS ═══════════
 async function loadSignals() {
-  const action = document.getElementById('filterAction').value;
-  const url = '/signals?limit=50' + (action ? '&action='+action : '');
+  const filter = document.getElementById('sig-filter').value;
+  const url = '/signals?limit=50' + (filter ? '&action='+filter : '');
   try {
     const r = await fetch(url);
     const d = await r.json();
     const feed = document.getElementById('signals-feed');
-    if (!d.signals || !d.signals.length) {
-      feed.innerHTML = '<div class="empty"><div class="empty-icon">📡</div>No signals match filter.<br>System is collecting data...</div>';
+    if (!d.signals?.length) {
+      feed.innerHTML = `<div class="radar-wrap">
+        <div class="radar"><div class="radar-sweep"></div></div>
+        <div class="radar-text">No signals match this filter</div>
+      </div>`;
       return;
     }
-    feed.innerHTML = d.signals.map(renderSignalFull).join('');
-  } catch(e) {
-    document.getElementById('signals-feed').innerHTML =
-      '<div class="empty"><div class="empty-icon">⚠</div>Cannot reach API.<br>Is HYPELOCK running?</div>';
-  }
-}
-
-function renderSignalMini(s) {
-  const score = s.score || 0;
-  return `<div class="signal-item ${s.action}">
-    <div class="signal-header">
-      <div class="signal-token">$${s.token || '???'}</div>
-      <div class="signal-action ${s.action}">${s.action}</div>
-    </div>
-    <div class="signal-meta">
-      <span>📊 ${score.toFixed(0)}/100</span>
-      <span>🔊 ${s.platform || '?'}</span>
-      <span>🕐 ${timeAgo(s.timestamp)}</span>
-    </div>
-    <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
-  </div>`;
-}
-
-function renderSignalFull(s) {
-  const score = s.score || 0;
-  const noise = (s.noiseScore || 0);
-  return `<div class="signal-item ${s.action}">
-    <div class="signal-header">
-      <div class="signal-token">$${s.token || '???'} <span style="color:var(--muted);font-size:11px;font-family:var(--mono)">${s.platform||''}</span></div>
-      <div class="signal-action ${s.action}">${s.action}</div>
-    </div>
-    <div class="signal-meta" style="margin-bottom:6px;">
-      <span>📊 ${score.toFixed(1)}</span>
-      <span>🎯 ${((s.confidence||0)*100).toFixed(0)}%</span>
-      <span>🔇 noise:${noise.toFixed(2)}</span>
-      <span>🕐 ${timeAgo(s.timestamp)}</span>
-    </div>
-    ${s.outcome ? `<div style="font-family:var(--mono);font-size:10px;color:${s.outcome.success?'var(--accent)':'var(--accent2)'}">
-      OUTCOME: ${s.outcome.success ? '✅ SUCCESS' : '❌ FAILED'} (${s.outcome.window}) — ratio: ${(s.outcome.engagementRatio||1).toFixed(2)}×
-    </div>` : ''}
-    <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
-  </div>`;
-}
-
-// ══ WEIGHTS RENDERER ════════════════════════════
-function renderWeights(containerId, weights) {
-  const el = document.getElementById(containerId);
-  if (!weights || !Object.keys(weights).length) {
-    el.innerHTML = '<div class="empty"><div class="empty-icon">⚖</div>No weight data</div>';
-    return;
-  }
-  const labels = {
-    likes: 'Likes',
-    comments: 'Comments',
-    recasts: 'Recasts / RT',
-    velocity: 'Velocity',
-    walletQuality: 'Wallet Quality',
-    engagementAcceleration: 'Acceleration',
-  };
-  el.innerHTML = Object.entries(weights).map(([k,v]) => {
-    const pct = (v * 100).toFixed(1);
-    return `<div class="weight-row">
-      <div class="weight-name">${labels[k]||k}</div>
-      <div class="weight-track"><div class="weight-fill" style="width:${Math.min(100, v*400)}%"></div></div>
-      <div class="weight-pct">${pct}%</div>
+    feed.innerHTML = d.signals.map(renderCard).join('');
+  } catch {
+    document.getElementById('signals-feed').innerHTML = `<div class="radar-wrap">
+      <div class="radar"><div class="radar-sweep"></div></div>
+      <div class="radar-text">Cannot reach HYPELOCK API<br><small>Is the server running?</small></div>
     </div>`;
-  }).join('');
+  }
 }
 
-// ══ LEARNING ════════════════════════════════════
-async function loadLearning() {
+function renderCard(s) {
+  const score   = s.score || 0;
+  const action  = s.action || 'IGNORE';
+  const colorCls = action === 'EXECUTE' ? 'green' : action === 'WATCH' ? 'yellow' : 'muted';
+  const iconCls  = action === 'EXECUTE' ? 'green' : action === 'WATCH' ? 'yellow' : 'muted';
+  const tkn = (s.token || '???').slice(0, 4);
+
+  const outcomeStr = s.outcome
+    ? (s.outcome.success
+        ? `<span style="color:var(--green)">✅ ${s.outcome.window} verified</span>`
+        : `<span style="color:var(--red)">❌ ${s.outcome.window} miss</span>`)
+    : `<span style="color:var(--muted)">⏳ evaluating...</span>`;
+
+  return `<div class="signal-card ${action}">
+    <div class="signal-top">
+      <div class="signal-token-wrap">
+        <div class="token-icon ${iconCls}">${tkn}</div>
+        <div>
+          <div class="signal-token-name">$${s.token || '???'}</div>
+          <div class="signal-platform">${s.platform || 'unknown'} · ${timeAgo(s.timestamp)}</div>
+        </div>
+      </div>
+      <div class="action-pill ${action}">${action === 'DISCARDED' ? 'BLOCKED' : action}</div>
+    </div>
+    <div class="score-row">
+      <div class="score-track"><div class="score-bar ${colorCls}" style="width:${score}%"></div></div>
+      <div class="score-num ${colorCls}">${Math.round(score)}</div>
+    </div>
+    <div class="signal-footer">
+      <span>Confidence: ${((s.confidence||0)*100).toFixed(0)}%</span>
+      <span>${outcomeStr}</span>
+    </div>
+  </div>`;
+}
+
+// ═══════════ BRAIN ═══════════
+async function loadBrain() {
   try {
     const r = await fetch('/learning/status');
     const d = await r.json();
 
-    document.getElementById('l-status').innerHTML = `
-      <div><span style="color:var(--accent)">RUNNING</span>&nbsp;&nbsp;&nbsp;&nbsp; ${d.running ? '✅ YES' : '❌ NO'}</div>
-      <div><span style="color:var(--accent)">CYCLES</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${d.cycles}</div>
-      <div><span style="color:var(--accent)">PENDING EVAL</span> ${d.pending}</div>
-      <div><span style="color:var(--accent)">EVALUATED</span>&nbsp;&nbsp; ${d.stats?.totalEvaluated ?? 0}</div>
-      <div><span style="color:var(--accent)">SUCCESSES</span>&nbsp;&nbsp; ${d.stats?.successes ?? 0}</div>
-      <div><span style="color:var(--accent)">FAILURES</span>&nbsp;&nbsp;&nbsp; ${d.stats?.failures ?? 0}</div>
-    `;
-
-    renderWeights('l-weights', d.currentWeights || {});
-
     const acc = d.accuracy;
-    document.getElementById('l-acc-val').textContent =
-      acc !== null && acc !== undefined ? (acc * 100).toFixed(1) + '%' : 'N/A';
-  } catch(e) {
-    document.getElementById('l-status').textContent = 'Cannot reach API.';
-  }
+    document.getElementById('l-acc').textContent =
+      acc != null ? (acc * 100).toFixed(1) + '%' : 'N/A';
+
+    // Weights
+    const weights = d.currentWeights || {};
+    const labels  = { likes:'Likes', comments:'Comments', recasts:'Shares/Recasts', velocity:'Velocity', walletQuality:'Wallet Quality', engagementAcceleration:'Growth Speed' };
+    document.getElementById('brain-weights').innerHTML =
+      Object.entries(weights).map(([k,v]) => {
+        const pct = (v*100).toFixed(1);
+        return `<div class="weight-item">
+          <div class="weight-header">
+            <span class="weight-name">${labels[k]||k}</span>
+            <span class="weight-pct">${pct}%</span>
+          </div>
+          <div class="weight-track">
+            <div class="weight-fill" style="width:${Math.min(100, v*400)}%"></div>
+          </div>
+        </div>`;
+      }).join('') || '<div style="color:var(--muted);font-size:13px;">No weight data yet</div>';
+
+    // Stats
+    const st = d.stats || {};
+    document.getElementById('brain-stats').innerHTML = `
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
+        <span>Learning Cycles</span><span style="color:var(--text);font-weight:600;">${d.cycles || 0}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
+        <span>Signals Evaluated</span><span style="color:var(--text);font-weight:600;">${st.totalEvaluated || 0}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
+        <span>Successful</span><span style="color:var(--green);font-weight:600;">${st.successes || 0}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span>Failed</span><span style="color:var(--red);font-weight:600;">${st.failures || 0}</span>
+      </div>`;
+  } catch { document.getElementById('brain-stats').textContent = 'Cannot reach API'; }
 }
 
-// ══ SIGNAL INJECTION ════════════════════════════
+// ═══════════ INJECT ═══════════
 async function injectSignal() {
-  const token    = document.getElementById('i-token').value.trim().toUpperCase() || 'WIF';
-  const platform = document.getElementById('i-platform').value;
-  const text     = document.getElementById('i-text').value;
-  const likes    = parseInt(document.getElementById('i-likes').value) || 0;
-  const comments = parseInt(document.getElementById('i-comments').value) || 0;
-  const recasts  = parseInt(document.getElementById('i-recasts').value) || 0;
-  const velocity = parseFloat(document.getElementById('i-velocity').value) || 0;
-  const followers= parseInt(document.getElementById('i-followers').value) || 0;
-  const walletUSD= parseInt(document.getElementById('i-wallet').value) || 0;
-
   const payload = {
-    token, platform, text,
-    metrics: { likes, comments, recasts },
-    velocity,
-    authorFollowers: followers,
-    authorAgeDays: 300,
-    walletData: { balanceUSD: walletUSD, ageDays: 300, txCount: 150, protocolCount: 5 },
+    token:    document.getElementById('i-token').value.trim().toUpperCase() || 'WIF',
+    platform: document.getElementById('i-platform').value,
+    text:     document.getElementById('i-text').value,
+    metrics: {
+      likes:    +document.getElementById('i-likes').value || 0,
+      comments: +document.getElementById('i-comments').value || 0,
+      recasts:  +document.getElementById('i-recasts').value || 0,
+    },
+    velocity:       +document.getElementById('i-velocity').value || 0,
+    authorFollowers:+document.getElementById('i-followers').value || 0,
+    authorAgeDays:  300,
+    walletData: { balanceUSD: +document.getElementById('i-wallet').value || 0, ageDays:300, txCount:150, protocolCount:5 },
   };
 
-  const box = document.getElementById('inject-result');
-  box.textContent = 'Injecting signal...';
+  document.getElementById('result-box').innerHTML = '<div style="text-align:center;padding:16px"><div class="loader"></div></div>';
 
   try {
     const r = await fetch('/evaluate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload),
     });
     const d = await r.json();
-
-    const color = { EXECUTE: '#00ff88', WATCH: '#ffaa00', IGNORE: '#555570', DISCARDED: '#ff3c6e' };
-    box.innerHTML = `<span style="color:${color[d.action]||'#fff'}">${d.action}</span>\n\n` +
-      `ID:         ${d.id}\n` +
-      `TOKEN:      $${token}\n` +
-      `SCORE:      ${(d.score||0).toFixed(2)} / 100\n` +
-      `CONFIDENCE: ${((d.confidence||0)*100).toFixed(1)}%\n` +
-      `NOISE:      ${(d.noiseScore||0).toFixed(3)}\n` +
-      `ACTION:     ${d.action}\n` +
-      `EXECUTED:   ${d.executed ? '✅ YES' : '—'}\n\n` +
-      `BREAKDOWN:\n${JSON.stringify(d.breakdown||{}, null, 2)}`;
-
-    toast(`${d.action} — score: ${(d.score||0).toFixed(0)}`, d.action === 'DISCARDED');
+    renderResult(d, payload.token);
+    toast(`${d.action} — Score: ${Math.round(d.score||0)}`, d.action === 'DISCARDED');
   } catch(e) {
-    box.textContent = 'ERROR: ' + e.message + '\n\nMake sure HYPELOCK is running on port 3000.';
-    toast('API unreachable', true);
+    document.getElementById('result-box').innerHTML = '<div class="result-placeholder" style="color:var(--red)">⚠ API unreachable<br>Is HYPELOCK running?</div>';
+    toast('API offline', true);
   }
 }
 
-// ══ PRESETS ═════════════════════════════════════
+function renderResult(d, token) {
+  const actionEmoji = { EXECUTE:'🔴', WATCH:'👀', IGNORE:'🔇', DISCARDED:'🚫' };
+  const actionDesc  = { EXECUTE:'Trade triggered', WATCH:'Monitoring signal', IGNORE:'Not strong enough', DISCARDED:'Noise detected — blocked' };
+  const score = d.score || 0;
+  const colorCls = d.action === 'EXECUTE' ? 'green' : d.action === 'WATCH' ? 'yellow' : d.action === 'IGNORE' ? 'muted' : 'red';
+
+  document.getElementById('result-box').innerHTML = `
+    <div class="result-action ${d.action}">${actionEmoji[d.action]||''} ${d.action}</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">${actionDesc[d.action]||''}</div>
+    <div class="score-row" style="margin-bottom:12px;">
+      <div class="score-track"><div class="score-bar ${colorCls}" style="width:${score}%"></div></div>
+      <div class="score-num ${colorCls}">${Math.round(score)}</div>
+    </div>
+    <div class="result-row"><span>Confidence</span><span>${((d.confidence||0)*100).toFixed(1)}%</span></div>
+    <div class="result-row"><span>Noise score</span><span>${((d.noiseScore||0)*100).toFixed(0)}% ${d.noiseScore > 0.5 ? '⚠' : '✅'}</span></div>
+    <div class="result-row"><span>Token</span><span>$${token}</span></div>
+    ${d.executed ? '<div class="result-row"><span>Trade</span><span style="color:var(--green)">✅ Paper executed</span></div>' : ''}
+  `;
+}
+
 function loadPreset(type) {
   const presets = {
-    whale: { token:'WIF', likes:1200, comments:180, recasts:450, velocity:35, followers:50000, wallet:50000, text:'WIF breaking out, massive whale accumulation' },
-    bot:   { token:'SCAM', likes:5000, comments:2, recasts:2000, velocity:800, followers:3, wallet:0, text:'FREE AIRDROP 100x gem buy now guaranteed profit' },
-    organic:{ token:'BONK', likes:180, comments:60, recasts:90, velocity:8, followers:3500, wallet:1800, text:'BONK ecosystem growing steadily, fundamentals strong' },
-    spam:  { token:'RUG', likes:50, comments:0, recasts:1000, velocity:200, followers:10, wallet:0, text:'GET RICH QUICK send eth dm me moon soon 🚀🚀🚀' },
+    whale:   { token:'WIF',  likes:1200, comments:180, recasts:450, velocity:35, followers:50000, wallet:50000, text:'WIF whale accumulation detected, massive buy wall building' },
+    organic: { token:'BONK', likes:180,  comments:60,  recasts:90,  velocity:8,  followers:3500,  wallet:1800,  text:'BONK ecosystem growing steadily, real community momentum' },
+    bot:     { token:'SCAM', likes:5000, comments:2,   recasts:2000,velocity:800, followers:3,    wallet:0,     text:'🚀🚀🚀 MOON SOON FREE AIRDROP guaranteed 100x gem buy now' },
+    spam:    { token:'RUG',  likes:50,   comments:0,   recasts:1000,velocity:200, followers:10,   wallet:0,     text:'GET RICH QUICK send eth dm me click here join now urgent' },
   };
-  const p = presets[type];
-  if (!p) return;
+  const p = presets[type]; if (!p) return;
   document.getElementById('i-token').value    = p.token;
   document.getElementById('i-text').value     = p.text;
   document.getElementById('i-likes').value    = p.likes;
@@ -1158,33 +1283,29 @@ function loadPreset(type) {
   document.getElementById('i-velocity').value = p.velocity;
   document.getElementById('i-followers').value= p.followers;
   document.getElementById('i-wallet').value   = p.wallet;
-  toast(`Preset loaded: ${type.toUpperCase()}`);
+  toast(`Preset: ${type.toUpperCase()}`);
+  // Auto-inject
+  setTimeout(injectSignal, 300);
 }
 
-// ══ UTILS ════════════════════════════════════════
+// ═══════════ UTILS ═══════════
 function timeAgo(ts) {
   if (!ts) return '?';
-  const diff = Date.now() - ts;
-  if (diff < 60000)   return Math.round(diff/1000) + 's ago';
-  if (diff < 3600000) return Math.round(diff/60000) + 'm ago';
-  return Math.round(diff/3600000) + 'h ago';
+  const s = Math.round((Date.now()-ts)/1000);
+  if (s < 60)    return s + 's ago';
+  if (s < 3600)  return Math.round(s/60) + 'm ago';
+  return Math.round(s/3600) + 'h ago';
 }
 
-// ══ INIT ═════════════════════════════════════════
+// ═══════════ INIT ═══════════
 (async () => {
-  await loadDashboard();
-  setInterval(checkHealth, 10000);
+  await loadRadar();
+  setInterval(checkHealth, 15000);
   setInterval(() => {
-    const page = document.querySelector('.page.active');
-    if (page?.id === 'page-dashboard') loadDashboard();
-    if (page?.id === 'page-signals')   loadSignals();
-  }, 15000);
-
-  // Uptime ticker
-  setInterval(() => {
-    const el = document.getElementById('uptime-ticker');
-    if (el) el.textContent = `HYPELOCK — ${new Date().toLocaleTimeString()} — ATTENTION IS THE ALPHA`;
-  }, 1000);
+    const active = document.querySelector('.page.active')?.id;
+    if (active === 'page-radar')   loadRadar();
+    if (active === 'page-signals') loadSignals();
+  }, 20000);
 })();
 </script>
 </body>
