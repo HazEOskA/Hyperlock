@@ -27,6 +27,11 @@ import { zoraPublisher } from './src/distribution/zoraPublisher.js';
 const app  = express();
 const PORT = CONFIG.PORT;
 app.use(express.json());
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/dashboard.html')));
 
 // Tokens/keywords to monitor — configure via env or extend dynamically
 const WATCH_TOKENS = (process.env.WATCH_TOKENS || 'WIF,BONK,POPCAT,PENGU,MOODENG')

@@ -1,0 +1,1746 @@
+2026-05-05 02:00:44.220 [[32MINFO[39M] [MemoryStore] Initialized
+2026-05-05 02:00:44.242 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:00:44.243 [[32MINFO[39M]   HYPELOCK — Attention Intelligence v1.0
+2026-05-05 02:00:44.244 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:00:44.244 [[32MINFO[39M]   MODE:   📄 PAPER
+2026-05-05 02:00:44.244 [[32MINFO[39M]   PORT:   3000
+2026-05-05 02:00:44.244 [[32MINFO[39M]   TOKENS: WIF, BONK, POPCAT, PENGU, MOODENG
+2026-05-05 02:00:44.245 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:00:44.262 [[32MINFO[39M] HYPELOCK API listening on port 3000
+2026-05-05 02:00:44.263 [[32MINFO[39M] AutoLearningLoop started
+  {
+  "module": "LearningLoop",
+  "intervalMs": 600000
+}
+2026-05-05 02:00:44.265 [[32MINFO[39M] Polling loops started
+  {
+  "farcaster": "30s",
+  "x": "60s",
+  "zora": "120s"
+}
+2026-05-05 02:01:14.849 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:15.513 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:15.721 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:15.918 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:16.081 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:44.270 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:01:44.583 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:44.900 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:45.105 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:45.317 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:01:45.625 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:14.701 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:15.118 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:15.315 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:15.541 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:15.723 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:44.309 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:02:44.798 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:45.121 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:45.308 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:45.514 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:02:45.726 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:14.713 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:15.006 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:15.208 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:15.358 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:15.522 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:44.313 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:03:45.017 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:45.340 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:45.621 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:45.830 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:03:46.045 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:15.023 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:15.328 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:15.546 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:15.842 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:16.043 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:44.313 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:04:44.647 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:44.917 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:45.228 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:45.385 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:04:45.534 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:15.020 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:15.520 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:15.746 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:15.960 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:16.264 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:44.333 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:05:44.617 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:45.224 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:45.424 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:45.664 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:05:45.811 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:14.829 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:15.177 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:15.659 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:15.847 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:16.238 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:44.333 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:06:44.705 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:45.132 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:45.342 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:45.491 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:06:45.683 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:14.931 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:15.236 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:15.643 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:15.887 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:16.162 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:44.334 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:07:44.769 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:45.154 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:45.376 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:45.586 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:07:45.751 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:14.918 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:15.251 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:15.497 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:15.712 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:15.872 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:44.352 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:08:44.664 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:45.046 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:45.284 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:45.444 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:08:45.594 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:14.669 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:15.334 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:15.494 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:15.657 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:15.902 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:44.371 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:09:44.748 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:45.052 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:45.490 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:45.650 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:09:45.836 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:14.750 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:15.054 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:15.264 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:15.645 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:15.841 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:44.372 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:10:45.596 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:46.027 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:46.288 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:46.502 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:10:46.821 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:14.788 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:15.120 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:15.271 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:15.421 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:15.575 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:44.394 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:11:44.797 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:45.080 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:45.488 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:45.689 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:11:45.878 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:14.772 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:15.699 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:15.900 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:16.108 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:16.808 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:44.399 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:12:44.862 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:45.382 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:45.601 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:45.905 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:12:46.104 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:14.989 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:15.384 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:15.611 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:16.010 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:16.316 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:44.399 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:13:44.884 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:45.402 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:45.703 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:46.006 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:46.213 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:13:48.393 [[32MINFO[39M] SIGINT received — shutting down gracefully
+2026-05-05 02:15:03.912 [[32MINFO[39M] [MemoryStore] Initialized
+2026-05-05 02:15:03.941 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:15:03.941 [[32MINFO[39M]   HYPELOCK — Attention Intelligence v1.0
+2026-05-05 02:15:03.942 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:15:03.942 [[32MINFO[39M]   MODE:   📄 PAPER
+2026-05-05 02:15:03.942 [[32MINFO[39M]   PORT:   3000
+2026-05-05 02:15:03.942 [[32MINFO[39M]   TOKENS: WIF, BONK, POPCAT, PENGU, MOODENG
+2026-05-05 02:15:03.942 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:15:03.950 [[32MINFO[39M] HYPELOCK API listening on port 3000
+2026-05-05 02:15:03.950 [[32MINFO[39M] AutoLearningLoop started
+  {
+  "module": "LearningLoop",
+  "intervalMs": 600000
+}
+2026-05-05 02:15:03.952 [[32MINFO[39M] Polling loops started
+  {
+  "farcaster": "30s",
+  "x": "60s",
+  "zora": "120s"
+}
+2026-05-05 02:15:34.705 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:15:35.164 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:15:35.364 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:15:35.574 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:15:35.780 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:03.955 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 02:16:04.343 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:04.652 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:04.860 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:05.009 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:05.172 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 02:16:23.531 [[32MINFO[39M] SIGINT received — shutting down gracefully
+2026-05-05 02:16:36.174 [[32MINFO[39M] [MemoryStore] Initialized
+2026-05-05 02:16:36.188 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:16:36.189 [[32MINFO[39M]   HYPELOCK — Attention Intelligence v1.0
+2026-05-05 02:16:36.189 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:16:36.189 [[32MINFO[39M]   MODE:   📄 PAPER
+2026-05-05 02:16:36.190 [[32MINFO[39M]   PORT:   3000
+2026-05-05 02:16:36.190 [[32MINFO[39M]   TOKENS: WIF, BONK, POPCAT, PENGU, MOODENG
+2026-05-05 02:16:36.190 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 02:16:36.201 [[32MINFO[39M] HYPELOCK API listening on port 3000
+2026-05-05 02:16:36.202 [[32MINFO[39M] AutoLearningLoop started
+  {
+  "module": "LearningLoop",
+  "intervalMs": 600000
+}
+2026-05-05 02:16:36.204 [[32MINFO[39M] Polling loops started
+  {
+  "farcaster": "30s",
+  "x": "60s",
+  "zora": "120s"
+}
+2026-05-05 02:17:06.610 [[32MINFO[39M] SIGINT received — shutting down gracefully
+2026-05-05 08:13:06.331 [[32MINFO[39M] [MemoryStore] Initialized
+2026-05-05 08:13:06.356 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:13:06.357 [[32MINFO[39M]   HYPELOCK — Attention Intelligence v1.0
+2026-05-05 08:13:06.357 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:13:06.358 [[32MINFO[39M]   MODE:   📄 PAPER
+2026-05-05 08:13:06.358 [[32MINFO[39M]   PORT:   3000
+2026-05-05 08:13:06.358 [[32MINFO[39M]   TOKENS: WIF, BONK, POPCAT, PENGU, MOODENG
+2026-05-05 08:13:06.358 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:13:06.372 [[32MINFO[39M] HYPELOCK API listening on port 3000
+2026-05-05 08:13:06.374 [[32MINFO[39M] AutoLearningLoop started
+  {
+  "module": "LearningLoop",
+  "intervalMs": 600000
+}
+2026-05-05 08:13:06.375 [[32MINFO[39M] Polling loops started
+  {
+  "farcaster": "30s",
+  "x": "60s",
+  "zora": "120s"
+}
+2026-05-05 08:13:37.243 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:13:37.483 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:13:37.673 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:13:37.816 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:13:37.941 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:13:43.140 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "9c4fcf14-a901-4bd0-9867-bff5e94bb70e",
+  "platform": "farcaster",
+  "token": "SCAM"
+}
+2026-05-05 08:13:43.151 [[32MINFO[39M] Signal DISCARDED
+  {
+  "module": "AlphaFilter",
+  "id": "9c4fcf14-a901-4bd0-9867-bff5e94bb70e",
+  "noiseScore": "1.000",
+  "reasons": [
+    "bot_pattern:0.50",
+    "spam:0.60"
+  ]
+}
+2026-05-05 08:13:44.899 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "fc9f9116-8a7c-4fa6-87e1-8d2cd92043ae",
+  "platform": "farcaster",
+  "token": "SCAM"
+}
+2026-05-05 08:13:44.903 [[32MINFO[39M] Signal DISCARDED
+  {
+  "module": "AlphaFilter",
+  "id": "fc9f9116-8a7c-4fa6-87e1-8d2cd92043ae",
+  "noiseScore": "1.000",
+  "reasons": [
+    "bot_pattern:0.50",
+    "spam:0.60"
+  ]
+}
+2026-05-05 08:14:06.380 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:14:06.738 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:07.183 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:07.311 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:07.495 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:07.606 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:36.862 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:37.072 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:37.310 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:37.327 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "ea21f963-1601-46d4-995e-fd43ac212eba",
+  "platform": "farcaster",
+  "token": "BONK"
+}
+2026-05-05 08:14:37.352 [[32MINFO[39M] Signal scored
+  {
+  "module": "AdaptiveScorer",
+  "id": "ea21f963-1601-46d4-995e-fd43ac212eba",
+  "token": "BONK",
+  "score": "51.28",
+  "confidence": "0.617",
+  "action": "WATCH"
+}
+2026-05-05 08:14:37.357 [[32MINFO[39M] Signal processed
+  {
+  "module": "SignalEngine",
+  "id": "ea21f963-1601-46d4-995e-fd43ac212eba",
+  "action": "WATCH",
+  "score": 51.28,
+  "confidence": 0.617
+}
+2026-05-05 08:14:37.474 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:14:37.690 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:06.429 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:15:06.780 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:07.297 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:07.478 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:07.785 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:07.920 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:36.872 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:37.082 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:37.276 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:37.485 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:15:37.689 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:06.430 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:16:06.692 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:07.179 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:07.385 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:07.590 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:07.792 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:37.008 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:37.383 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:37.638 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:37.843 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:16:38.111 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:06.431 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:17:06.678 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:06.996 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:07.287 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:07.405 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:07.588 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:36.785 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:37.006 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:37.388 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:37.591 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:37.829 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:17:44.930 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "1f016afd-4249-488a-9a56-a5334dcb9b47",
+  "platform": "farcaster",
+  "token": "WIF"
+}
+2026-05-05 08:17:44.937 [[32MINFO[39M] Signal scored
+  {
+  "module": "AdaptiveScorer",
+  "id": "1f016afd-4249-488a-9a56-a5334dcb9b47",
+  "token": "WIF",
+  "score": "69.03",
+  "confidence": "0.655",
+  "action": "WATCH"
+}
+2026-05-05 08:17:44.943 [[32MINFO[39M] Signal processed
+  {
+  "module": "SignalEngine",
+  "id": "1f016afd-4249-488a-9a56-a5334dcb9b47",
+  "action": "WATCH",
+  "score": 69.03,
+  "confidence": 0.655
+}
+2026-05-05 08:17:46.313 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "ff7728bc-0794-4fa1-b1c1-2828e2568e20",
+  "platform": "farcaster",
+  "token": "SCAM"
+}
+2026-05-05 08:17:46.316 [[32MINFO[39M] Signal DISCARDED
+  {
+  "module": "AlphaFilter",
+  "id": "ff7728bc-0794-4fa1-b1c1-2828e2568e20",
+  "noiseScore": "1.000",
+  "reasons": [
+    "bot_pattern:0.50",
+    "spam:0.60"
+  ]
+}
+2026-05-05 08:17:48.411 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "7cff7c59-3eed-4497-8349-63db93cecb87",
+  "platform": "farcaster",
+  "token": "BONK"
+}
+2026-05-05 08:17:48.415 [[32MINFO[39M] Signal scored
+  {
+  "module": "AdaptiveScorer",
+  "id": "7cff7c59-3eed-4497-8349-63db93cecb87",
+  "token": "BONK",
+  "score": "51.28",
+  "confidence": "0.726",
+  "action": "WATCH"
+}
+2026-05-05 08:17:48.417 [[32MINFO[39M] Signal processed
+  {
+  "module": "SignalEngine",
+  "id": "7cff7c59-3eed-4497-8349-63db93cecb87",
+  "action": "WATCH",
+  "score": 51.28,
+  "confidence": 0.726
+}
+2026-05-05 08:17:49.973 [[32MINFO[39M] Processing signal
+  {
+  "module": "SignalEngine",
+  "id": "672477fe-f35a-4b79-b073-b66bdd4eea84",
+  "platform": "farcaster",
+  "token": "RUG"
+}
+2026-05-05 08:17:49.979 [[32MINFO[39M] Signal DISCARDED
+  {
+  "module": "AlphaFilter",
+  "id": "672477fe-f35a-4b79-b073-b66bdd4eea84",
+  "noiseScore": "0.700",
+  "reasons": [
+    "spam:0.60"
+  ]
+}
+2026-05-05 08:18:06.434 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:18:06.780 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:07.191 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:07.396 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:07.599 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:07.804 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:36.853 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:37.090 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:37.214 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:37.406 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:18:37.526 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:06.434 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:19:06.732 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:07.200 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:07.402 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:07.709 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:07.919 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:36.693 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:36.897 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:37.099 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:37.303 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:19:37.471 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:20:02.494 [[32MINFO[39M] SIGINT received — shutting down gracefully
+2026-05-05 08:25:35.386 [[32MINFO[39M] [MemoryStore] Initialized
+2026-05-05 08:25:35.407 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:25:35.407 [[32MINFO[39M]   HYPELOCK — Attention Intelligence v1.0
+2026-05-05 08:25:35.408 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:25:35.408 [[32MINFO[39M]   MODE:   📄 PAPER
+2026-05-05 08:25:35.408 [[32MINFO[39M]   PORT:   3000
+2026-05-05 08:25:35.408 [[32MINFO[39M]   TOKENS: WIF, BONK, POPCAT, PENGU, MOODENG
+2026-05-05 08:25:35.408 [[32MINFO[39M] ═══════════════════════════════════════
+2026-05-05 08:25:35.421 [[32MINFO[39M] HYPELOCK API listening on port 3000
+2026-05-05 08:25:35.422 [[32MINFO[39M] AutoLearningLoop started
+  {
+  "module": "LearningLoop",
+  "intervalMs": 600000
+}
+2026-05-05 08:25:35.423 [[32MINFO[39M] Polling loops started
+  {
+  "farcaster": "30s",
+  "x": "60s",
+  "zora": "120s"
+}
+2026-05-05 08:26:06.898 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:07.167 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:07.288 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:07.407 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:07.560 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:35.449 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:26:35.721 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:35.932 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:36.126 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:36.266 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:26:36.538 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:05.728 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:05.945 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:06.141 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:06.335 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:06.537 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:35.500 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:27:35.759 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:36.035 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:36.235 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:36.445 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:27:36.645 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:05.727 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:05.938 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:06.135 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:06.342 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:06.545 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:35.499 [[33MWARN[39M] X integration: no bearer token configured, skipping
+  {
+  "module": "SignalEngine"
+}
+2026-05-05 08:28:35.903 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "WIF",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:36.136 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "BONK",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:36.343 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "POPCAT",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:36.462 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "PENGU",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:36.578 [[31MERROR[39M] Farcaster fetch error
+  {
+  "module": "SignalEngine",
+  "keyword": "MOODENG",
+  "error": "Farcaster API 503"
+}
+2026-05-05 08:28:53.178 [[32MINFO[39M] SIGINT received — shutting down gracefully
