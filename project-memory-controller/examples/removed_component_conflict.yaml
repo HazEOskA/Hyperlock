@@ -1,0 +1,10 @@
+STATE_UPDATE:
+  add:
+    ACTIVE_COMPONENTS:
+      - legacy_parser
+  reason: "LLM suggested bringing back the previous parser."
+
+EXPECTED_RESULT:
+  status: CONFLICT
+  rule: REMOVED_REUSE_BLOCK
+  message: "legacy_parser exists in REMOVED_COMPONENTS and cannot be reintroduced without human override."

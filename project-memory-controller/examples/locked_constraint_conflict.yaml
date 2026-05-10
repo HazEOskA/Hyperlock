@@ -1,0 +1,10 @@
+STATE_UPDATE:
+  remove:
+    LOCKED_CONSTRAINTS:
+      - Use deterministic validation only.
+  reason: "Switch validation to LLM-based judgement."
+
+EXPECTED_RESULT:
+  status: CONFLICT
+  rule: LOCKED_CONSTRAINT_BLOCK
+  message: "Locked constraints cannot be changed without explicit human override."
